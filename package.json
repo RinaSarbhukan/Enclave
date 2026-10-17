@@ -1,0 +1,22 @@
+{
+  "name": "enclave",
+  "version": "1.0.0",
+  "description": "Enclave: Private Client-Side Dataset Intelligence & Visualization Platform",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "csv",
+    "analytics",
+    "visualization",
+    "chartjs",
+    "data-profiling"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "papaparse": "^5.7.0"
+  }
+}

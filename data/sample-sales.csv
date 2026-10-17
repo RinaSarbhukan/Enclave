@@ -1,0 +1,801 @@
+Order ID,Order Date,Product,Category,Region,Quantity,Unit Price,Revenue
+ORD-10001,2023-05-02,Ergonomic Chair,Furniture,East,6,299,1794
+ORD-10002,2024-04-22,Mechanical Keyboard,Electronics,North,15,129,1935
+ORD-10003,2024-04-15,RAM 32GB DDR5,Hardware,West,9,139.5,1255.5
+ORD-10004,2024-05-19,Wireless Headphones,Electronics,Central,14,99.99,1399.86
+ORD-10005,2023-05-22,Gel Pens Pack,Office Supplies,East,15,12.5,187.5
+ORD-10006,2023-09-12,SSD 1TB NVMe,Hardware,Central,1,109.99,109.99
+ORD-10007,2024-04-06,Mechanical Keyboard,Electronics,Central,11,129,1419
+ORD-10008,2024-01-24,Bookshelf,Furniture,West,11,149,1639
+ORD-10009,2023-04-15,RAM 32GB DDR5,Hardware,North,7,139.5,976.5
+ORD-10010,2024-03-15,USB-C Dock,Electronics,East,6,79.95,479.7
+ORD-10011,2023-06-01,4K Monitor,Electronics,North,6,349.5,2097
+ORD-10012,2024-04-20,Wi-Fi 6 Router,Hardware,North,9,159,1431
+ORD-10013,2024-06-19,Standing Desk,Furniture,North,2,499,998
+ORD-10014,2024-01-23,Wi-Fi 6 Router,Hardware,East,5,159,795
+ORD-10015,2023-05-13,Mechanical Keyboard,Electronics,North,10,129,1290
+ORD-10016,2023-05-05,Notebook A5,Office Supplies,South,11,8.95,98.45
+ORD-10017,2024-04-03,Wi-Fi 6 Router,Hardware,,7,159,1113
+ORD-10018,2023-12-22,Wireless Headphones,Electronics,East,15,99.99,1499.85
+ORD-10019,2023-01-25,Bookshelf,Furniture,East,2,149,298
+ORD-10020,2023-04-03,Wi-Fi 6 Router,Hardware,West,6,159,954
+ORD-10021,2024-05-13,Standing Desk,Furniture,Central,3,499,1497
+ORD-10022,2023-08-09,Bookshelf,Furniture,South,1,149,149
+ORD-10023,2023-05-20,Notebook A5,Office Supplies,East,9,8.95,80.55
+ORD-10024,2023-05-07,Stapler Heavy Duty,Office Supplies,West,6,24,144
+ORD-10025,2024-05-17,Desk Lamp,Furniture,South,15,45,675
+ORD-10026,2023-05-20,Paper Ream,Office Supplies,North,9,18,162
+ORD-10027,2024-01-22,Paper Ream,Office Supplies,Central,13,18,234
+ORD-10028,2023-01-28,Bookshelf,Furniture,West,6,149,894
+ORD-10029,2023-01-21,Desk Lamp,Furniture,Central,9,45,405
+ORD-10030,2023-09-13,Bookshelf,Furniture,West,4,149,596
+ORD-10031,2024-04-06,Stapler Heavy Duty,Office Supplies,North,11,24,264
+ORD-10032,2024-06-28,Wi-Fi 6 Router,Hardware,East,15,159,2385
+ORD-10033,2023-10-24,Paper Ream,Office Supplies,North,10,18,180
+ORD-10034,2024-05-28,USB-C Dock,Electronics,North,7,79.95,559.65
+ORD-10035,2023-01-17,Bookshelf,Furniture,East,7,149,1043
+ORD-10036,2023-02-28,Gel Pens Pack,Office Supplies,North,4,12.5,50
+ORD-10037,2024-06-16,Bookshelf,Furniture,East,11,149,1639
+ORD-10038,2023-06-02,Notebook A5,Office Supplies,West,14,8.95,125.3
+ORD-10039,2024-02-13,RAM 32GB DDR5,Hardware,West,9,139.5,1255.5
+ORD-10040,2023-02-26,Ergonomic Chair,Furniture,South,6,299,1794
+ORD-10041,2024-03-27,Desk Lamp,Furniture,West,5,45,225
+ORD-10042,2024-02-03,Notebook A5,Office Supplies,South,NA,8.95,71.6
+ORD-10043,2024-03-14,Wi-Fi 6 Router,Hardware,South,15,159,2385
+ORD-10044,2023-11-18,Wi-Fi 6 Router,Hardware,North,8,159,1272
+ORD-10045,2023-01-29,Gel Pens Pack,Office Supplies,East,13,12.5,162.5
+ORD-10046,2024-01-02,4K Monitor,Electronics,Central,10,349.5,3495
+ORD-10047,2024-05-22,Mechanical Keyboard,Electronics,East,3,129,387
+ORD-10048,2024-02-23,Webcam Pro,Electronics,Central,2,69,138
+ORD-10049,2024-04-22,USB-C Dock,Electronics,Central,13,79.95,1039.35
+ORD-10050,2023-12-06,  USB-C Dock ,Electronics,Central,9,79.95,719.55
+ORD-10051,2023-09-01,Wi-Fi 6 Router,Hardware,West,12,159,1908
+ORD-10052,2023-05-12,Mechanical Keyboard,Electronics,East,3,129,387
+ORD-10053,2024-01-10,Ergonomic Chair,Furniture,West,4,299,1196
+ORD-10054,2024-06-19,Wireless Headphones,Electronics,Central,6,99.99,599.94
+ORD-10055,2024-04-04,Ergonomic Chair,Furniture,North,4,299,1196
+ORD-10056,2024-01-29,Bookshelf,Furniture,South,5,149,745
+ORD-10057,2023-01-28,Webcam Pro,Electronics,West,13,69,897
+ORD-10058,2024-05-17,4K Monitor,Electronics,South,13,349.5,4543.5
+ORD-10059,2023-08-27,Ergonomic Chair,Furniture,West,14,299,4186
+ORD-10060,2024-02-06,USB-C Dock,Electronics,North,5,79.95,399.75
+ORD-10061,2023-02-03,Desk Lamp,Furniture,West,13,45,585
+ORD-10062,2023-04-07,4K Monitor,Electronics,West,6,349.5,2097
+ORD-10063,2023-10-08,Wi-Fi 6 Router,Hardware,East,11,159,1749
+ORD-10064,2023-12-27,Wireless Headphones,Electronics,East,15,99.99,1499.85
+ORD-10065,2023-11-15,4K Monitor,Electronics,Central,5,349.5,1747.5
+ORD-10066,2023-12-20,Wi-Fi 6 Router,Hardware,West,15,159,2385
+ORD-10067,2023-10-27,Ergonomic Chair,Furniture,West,2,299,598
+ORD-10068,2023-12-18,USB-C Dock,Electronics,Central,12,79.95,959.4
+ORD-10069,2023-03-20,Desk Lamp,Furniture,North,6,45,270
+ORD-10070,2023-01-23,Notebook A5,Office Supplies,South,1,8.95,8.95
+ORD-10071,2023-08-30,RAM 32GB DDR5,Hardware,East,13,139.5,1813.5
+ORD-10072,2023-05-23,Bookshelf,Furniture,Central,9,149,1341
+ORD-10073,2023-09-16,Mechanical Keyboard,Electronics,South,4,129,516
+ORD-10074,2024-06-27,RAM 32GB DDR5,Hardware,West,9,139.5,1255.5
+ORD-10075,2024-05-03,SSD 1TB NVMe,Hardware,South,9,109.99,989.91
+ORD-10076,2024-06-17,Mechanical Keyboard,Electronics,South,6,129,774
+ORD-10077,2024-06-24,USB-C Dock,Electronics,West,9,79.95,719.55
+ORD-10078,2023-08-08,Gel Pens Pack,Office Supplies,Central,6,12.5,75
+ORD-10079,2023-06-10,Wi-Fi 6 Router,Hardware,West,10,159,1590
+ORD-10080,2024-02-08,Wireless Headphones,Electronics,North,3,99.99,299.97
+ORD-10081,2024-01-22,RAM 32GB DDR5,Hardware,West,2,139.5,279
+ORD-10082,2024-04-12,Mechanical Keyboard,Electronics,West,6,129,774
+ORD-10083,2024-03-07,Desk Lamp,Furniture,South,4,45,180
+ORD-10084,2023-06-06,SSD 1TB NVMe,Hardware,South,14,109.99,1539.86
+ORD-10085,2023-07-22,SSD 1TB NVMe,Hardware,West,2,109.99,219.98
+ORD-10086,2023-09-07,Webcam Pro,Electronics,East,14,69,966
+ORD-10087,2023-08-19,Desk Lamp,Furniture,North,8,45,360
+ORD-10088,2024-06-27,Webcam Pro,Electronics,South,6,,414
+ORD-10089,2024-03-10,Gel Pens Pack,Office Supplies,North,2,12.5,25
+ORD-10090,2023-08-13,Wi-Fi 6 Router,Hardware,West,4,159,636
+ORD-10091,2023-08-25,4K Monitor,Electronics,West,3,349.5,1048.5
+ORD-10092,2023-07-06,Mechanical Keyboard,Electronics,East,1,129,129
+ORD-10093,2024-01-26,SSD 1TB NVMe,Hardware,Central,14,109.99,1539.86
+ORD-10094,2023-03-11,SSD 1TB NVMe,Hardware,East,9,109.99,989.91
+ORD-10095,2023-04-20,Stapler Heavy Duty,Office Supplies,East,10,24,240
+ORD-10096,2023-06-20,Paper Ream,Office Supplies,Central,2,18,36
+ORD-10097,2023-12-04,Desk Lamp,Furniture,Central,9,45,405
+ORD-10098,2024-02-29,Desk Lamp,Furniture,Central,12,45,540
+ORD-10099,2023-07-26,Standing Desk,Furniture,West,6,499,2994
+ORD-10100,2023-07-07,  Webcam Pro ,Electronics,East,6,69,414
+ORD-10101,2023-07-18,Bookshelf,Furniture,Central,8,149,1192
+ORD-10102,2023-10-01,Bookshelf,Furniture,South,3,149,447
+ORD-10103,2023-04-01,USB-C Dock,Electronics,Central,11,79.95,879.45
+ORD-10104,2023-11-27,RAM 32GB DDR5,Hardware,East,7,139.5,976.5
+ORD-10105,2023-11-15,RAM 32GB DDR5,Hardware,South,14,139.5,1953
+ORD-10106,2024-02-02,USB-C Dock,Electronics,North,2,79.95,159.9
+ORD-10107,2024-04-07,Paper Ream,Office Supplies,South,4,18,72
+ORD-10108,2024-01-31,SSD 1TB NVMe,Hardware,North,7,109.99,769.93
+ORD-10109,2023-03-11,Ergonomic Chair,Furniture,Central,5,299,1495
+ORD-10110,2023-06-23,Paper Ream,Office Supplies,Central,14,18,252
+ORD-10111,2024-06-13,Stapler Heavy Duty,Office Supplies,Central,7,24,168
+ORD-10112,2023-05-20,Gel Pens Pack,Office Supplies,East,13,12.5,162.5
+ORD-10113,2023-02-21,USB-C Dock,Electronics,West,10,79.95,799.5
+ORD-10114,2023-09-07,RAM 32GB DDR5,Hardware,Central,8,139.5,1116
+ORD-10115,2024-03-30,Gel Pens Pack,Office Supplies,Central,5,12.5,62.5
+ORD-10116,2023-10-01,Wi-Fi 6 Router,Hardware,West,8,159,1272
+ORD-10117,2023-04-03,Desk Lamp,Furniture,South,15,45,675
+ORD-10118,2023-10-18,4K Monitor,Electronics,West,9,349.5,3145.5
+ORD-10119,2023-03-22,SSD 1TB NVMe,Hardware,South,7,109.99,769.93
+ORD-10120,2023-09-24,Stapler Heavy Duty,Office Supplies,West,8,24,null
+ORD-10121,2023-07-03,Standing Desk,Furniture,West,11,499,5489
+ORD-10122,2023-08-20,Standing Desk,Furniture,East,14,499,6986
+ORD-10123,2023-01-16,RAM 32GB DDR5,Hardware,East,3,139.5,418.5
+ORD-10124,2023-04-14,Notebook A5,Office Supplies,South,5,8.95,44.75
+ORD-10125,2023-04-14,Mechanical Keyboard,Electronics,South,14,129,1806
+ORD-10126,2024-05-21,Notebook A5,Office Supplies,West,9,8.95,80.55
+ORD-10127,2024-01-18,RAM 32GB DDR5,Hardware,Central,15,139.5,2092.5
+ORD-10128,2023-06-25,Notebook A5,Office Supplies,East,8,8.95,71.6
+ORD-10129,2023-07-24,Bookshelf,Furniture,North,12,149,1788
+ORD-10130,2023-05-19,Standing Desk,Furniture,Central,10,499,4990
+ORD-10131,2023-11-02,Notebook A5,Office Supplies,South,14,8.95,125.3
+ORD-10132,2023-06-03,Paper Ream,Office Supplies,West,9,18,162
+ORD-10133,2024-05-25,4K Monitor,Electronics,West,10,349.5,3495
+ORD-10134,2024-03-15,Paper Ream,Office Supplies,North,1,18,18
+ORD-10135,2023-09-22,SSD 1TB NVMe,Hardware,East,11,109.99,1209.89
+ORD-10136,2023-02-10,Ergonomic Chair,Furniture,North,6,299,1794
+ORD-10137,2023-10-31,RAM 32GB DDR5,Hardware,Central,3,139.5,418.5
+ORD-10138,2024-01-17,SSD 1TB NVMe,Hardware,Central,3,109.99,329.97
+ORD-10139,2023-10-19,Wi-Fi 6 Router,Hardware,West,7,159,1113
+ORD-10140,2023-06-07,Standing Desk,Furniture,Central,4,499,1996
+ORD-10141,2023-01-02,SSD 1TB NVMe,Hardware,West,13,109.99,1429.87
+ORD-10142,2024-01-29,Bookshelf,Furniture,North,1,149,149
+ORD-10143,2023-08-18,Stapler Heavy Duty,Office Supplies,West,12,24,288
+ORD-10144,2023-09-01,USB-C Dock,Electronics,South,3,79.95,239.85
+ORD-10145,2023-05-08,Webcam Pro,Electronics,North,12,69,828
+ORD-10146,2023-12-30,Wi-Fi 6 Router,Hardware,West,4,159,636
+ORD-10147,2023-08-09,SSD 1TB NVMe,Hardware,Central,2,109.99,219.98
+ORD-10148,2023-07-06,Webcam Pro,Electronics,Central,7,69,483
+ORD-10149,2024-06-19,Webcam Pro,Electronics,Central,6,69,414
+ORD-10150,2023-06-09,  RAM 32GB DDR5 ,Hardware,South,6,139.5,837
+ORD-10151,2023-10-02,USB-C Dock,Electronics,North,9,79.95,719.55
+ORD-10152,2023-03-19,Notebook A5,Office Supplies,East,9,8.95,80.55
+ORD-10153,2024-03-13,Wi-Fi 6 Router,Hardware,North,1,159,159
+ORD-10154,2023-06-13,Notebook A5,Office Supplies,Central,2,8.95,17.9
+ORD-10155,2023-03-17,SSD 1TB NVMe,Hardware,East,15,109.99,1649.85
+ORD-10156,2023-07-20,Wireless Headphones,Electronics,South,10,99.99,999.9
+ORD-10157,2024-04-21,Webcam Pro,Electronics,South,9,69,621
+ORD-10158,2023-02-11,4K Monitor,Electronics,North,15,349.5,5242.5
+ORD-10159,2023-12-16,Webcam Pro,Electronics,East,2,69,138
+ORD-10160,2023-02-09,Wi-Fi 6 Router,Hardware,South,12,159,1908
+ORD-10161,2023-01-19,Paper Ream,Office Supplies,North,12,18,216
+ORD-10162,2023-03-16,Bookshelf,Furniture,South,6,149,894
+ORD-10163,2023-04-27,USB-C Dock,Electronics,East,8,79.95,639.6
+ORD-10164,2024-03-12,Gel Pens Pack,Office Supplies,East,3,12.5,37.5
+ORD-10165,2024-04-13,Wi-Fi 6 Router,Hardware,Central,9,159,1431
+ORD-10166,2023-09-23,Notebook A5,Office Supplies,East,9,8.95,80.55
+ORD-10167,2023-06-10,Mechanical Keyboard,Electronics,South,12,129,1548
+ORD-10168,2023-03-08,RAM 32GB DDR5,Hardware,North,13,139.5,1813.5
+ORD-10169,2024-02-15,Gel Pens Pack,Office Supplies,East,6,12.5,75
+ORD-10170,2023-06-24,Bookshelf,Furniture,West,15,149,2235
+ORD-10171,2023-08-11,Wireless Headphones,Electronics,North,5,99.99,499.95
+ORD-10172,2024-04-28,Notebook A5,Office Supplies,Central,14,8.95,125.3
+ORD-10173,2023-07-16,Mechanical Keyboard,Electronics,Central,6,129,774
+ORD-10174,2024-03-14,Bookshelf,Furniture,Central,5,149,745
+ORD-10175,2024-05-23,Gel Pens Pack,Office Supplies,North,9,12.5,112.5
+ORD-10176,2023-09-06,Notebook A5,Office Supplies,East,7,8.95,62.65
+ORD-10177,2024-03-06,Notebook A5,Office Supplies,North,11,8.95,98.45
+ORD-10178,2024-04-19,Webcam Pro,Electronics,Central,7,69,483
+ORD-10179,2023-08-12,Bookshelf,Furniture,North,9,149,1341
+ORD-10180,2023-10-19,Standing Desk,Furniture,South,7,499,3493
+ORD-10181,2023-08-13,Paper Ream,Office Supplies,East,13,18,234
+ORD-10182,2023-04-30,Wireless Headphones,Electronics,West,10,99.99,999.9
+ORD-10183,2023-06-09,Notebook A5,Office Supplies,West,10,8.95,89.5
+ORD-10184,2023-08-16,Wireless Headphones,Electronics,South,15,99.99,1499.85
+ORD-10185,2023-05-30,USB-C Dock,Electronics,East,13,79.95,1039.35
+ORD-10186,2023-01-12,Paper Ream,Office Supplies,Central,9,18,162
+ORD-10187,2023-05-18,Desk Lamp,Furniture,North,1,45,45
+ORD-10188,2024-02-01,SSD 1TB NVMe,Hardware,South,8,109.99,879.92
+ORD-10189,2023-07-14,Ergonomic Chair,Furniture,East,6,299,1794
+ORD-10190,2024-06-08,Notebook A5,Office Supplies,South,9,8.95,80.55
+ORD-10191,2023-09-16,RAM 32GB DDR5,Hardware,East,2,139.5,279
+ORD-10192,2024-06-14,SSD 1TB NVMe,Hardware,Central,7,109.99,769.93
+ORD-10193,2023-05-05,Ergonomic Chair,Furniture,South,9,299,2691
+ORD-10194,2023-12-12,Desk Lamp,Furniture,West,10,45,450
+ORD-10195,2023-10-21,Wi-Fi 6 Router,Hardware,South,14,159,2226
+ORD-10196,2023-10-03,Desk Lamp,Furniture,South,8,45,360
+ORD-10197,2024-04-04,Wi-Fi 6 Router,Hardware,South,1,159,159
+ORD-10198,2023-09-14,Gel Pens Pack,Office Supplies,North,12,12.5,150
+ORD-10199,2024-03-22,SSD 1TB NVMe,Hardware,East,13,109.99,1429.87
+ORD-10200,2024-01-25,  Mechanical Keyboard ,Electronics,Central,13,129,1677
+ORD-10201,2023-09-19,RAM 32GB DDR5,Hardware,South,3,139.5,418.5
+ORD-10202,2023-12-16,Ergonomic Chair,Furniture,South,2,299,598
+ORD-10203,2023-09-28,Stapler Heavy Duty,Office Supplies,South,5,24,120
+ORD-10204,2023-10-03,Ergonomic Chair,Furniture,North,12,299,3588
+ORD-10205,2023-03-17,RAM 32GB DDR5,Hardware,  ,15,139.5,2092.5
+ORD-10206,2023-12-23,Gel Pens Pack,Office Supplies,North,10,12.5,125
+ORD-10207,2023-12-07,RAM 32GB DDR5,Hardware,East,8,139.5,1116
+ORD-10208,2023-08-29,Paper Ream,Office Supplies,West,4,18,72
+ORD-10209,2024-04-17,Wireless Headphones,Electronics,North,10,99.99,999.9
+ORD-10210,2023-11-17,RAM 32GB DDR5,Hardware,North,13,139.5,1813.5
+ORD-10211,2024-04-02,SSD 1TB NVMe,Hardware,East,11,109.99,1209.89
+ORD-10212,2023-02-05,RAM 32GB DDR5,Hardware,West,15,139.5,2092.5
+ORD-10213,2024-02-24,Gel Pens Pack,Office Supplies,East,1,12.5,12.5
+ORD-10214,2023-04-09,Gel Pens Pack,Office Supplies,Central,7,12.5,87.5
+ORD-10215,2023-12-24,Stapler Heavy Duty,Office Supplies,East,7,24,168
+ORD-10216,2023-06-08,Stapler Heavy Duty,Office Supplies,Central,11,24,264
+ORD-10217,2024-03-06,Desk Lamp,Furniture,East,5,45,225
+ORD-10218,2023-04-24,4K Monitor,Electronics,East,6,349.5,2097
+ORD-10219,2023-08-27,Paper Ream,Office Supplies,South,9,18,162
+ORD-10220,2024-04-29,Standing Desk,Furniture,Central,7,499,3493
+ORD-10221,2023-08-27,Wi-Fi 6 Router,Hardware,South,4,159,636
+ORD-10222,2024-04-15,Paper Ream,Office Supplies,North,2,18,36
+ORD-10223,2023-09-19,Paper Ream,Office Supplies,Central,12,18,216
+ORD-10224,2023-08-25,Stapler Heavy Duty,Office Supplies,West,7,24,168
+ORD-10225,2023-01-26,RAM 32GB DDR5,Hardware,West,14,139.5,1953
+ORD-10226,2023-02-16,Wi-Fi 6 Router,Hardware,West,12,159,1908
+ORD-10227,2024-03-16,Ergonomic Chair,Furniture,West,13,299,3887
+ORD-10228,2023-05-28,Ergonomic Chair,Furniture,East,6,299,1794
+ORD-10229,2023-06-10,Bookshelf,Furniture,North,3,149,447
+ORD-10230,2023-02-07,Wi-Fi 6 Router,Hardware,North,10,159,1590
+ORD-10231,2023-11-27,Stapler Heavy Duty,Office Supplies,Central,6,24,144
+ORD-10232,2023-07-02,RAM 32GB DDR5,Hardware,East,1,139.5,139.5
+ORD-10233,2024-06-29,USB-C Dock,Electronics,South,11,79.95,879.45
+ORD-10234,2023-07-13,Stapler Heavy Duty,Office Supplies,North,9,24,216
+ORD-10235,2023-08-11,Gel Pens Pack,Office Supplies,West,9,12.5,112.5
+ORD-10236,2024-05-05,Notebook A5,Office Supplies,North,2,8.95,17.9
+ORD-10237,2023-09-25,USB-C Dock,Electronics,East,3,79.95,239.85
+ORD-10238,2023-05-13,RAM 32GB DDR5,Hardware,South,12,139.5,1674
+ORD-10239,2023-08-28,Stapler Heavy Duty,Office Supplies,South,3,24,72
+ORD-10240,2023-11-13,4K Monitor,Electronics,Central,4,349.5,1398
+ORD-10241,2023-01-16,Notebook A5,Office Supplies,Central,8,8.95,71.6
+ORD-10242,2023-09-24,Gel Pens Pack,Office Supplies,North,15,12.5,187.5
+ORD-10243,2024-02-16,Notebook A5,Office Supplies,East,8,8.95,71.6
+ORD-10244,2023-04-16,Wi-Fi 6 Router,Hardware,South,11,159,1749
+ORD-10245,2023-02-04,RAM 32GB DDR5,Hardware,West,11,139.5,1534.5
+ORD-10246,2023-08-28,Paper Ream,Office Supplies,Central,4,18,72
+ORD-10247,2023-01-30,Standing Desk,Furniture,North,6,499,2994
+ORD-10248,2023-05-19,USB-C Dock,Electronics,South,11,79.95,879.45
+ORD-10249,2023-07-03,USB-C Dock,Electronics,Central,15,79.95,1199.25
+ORD-10250,2023-03-10,  Bookshelf ,Furniture,North,12,149,1788
+ORD-10251,2023-07-05,Bookshelf,Furniture,West,2,149,298
+ORD-10252,2023-05-08,Wireless Headphones,Electronics,West,13,99.99,1299.87
+ORD-10253,2023-03-04,RAM 32GB DDR5,Hardware,East,14,139.5,1953
+ORD-10254,2024-06-02,Stapler Heavy Duty,Office Supplies,West,10,24,240
+ORD-10255,2024-02-24,Bookshelf,Furniture,North,12,149,1788
+ORD-10256,2024-05-01,Webcam Pro,Electronics,West,14,69,966
+ORD-10257,2023-01-17,Notebook A5,Office Supplies,South,10,8.95,89.5
+ORD-10258,2024-06-18,Standing Desk,Furniture,East,1,499,499
+ORD-10259,2023-07-23,Wi-Fi 6 Router,Hardware,Central,3,159,477
+ORD-10260,2023-05-08,SSD 1TB NVMe,Hardware,East,15,109.99,1649.85
+ORD-10261,2023-06-28,Gel Pens Pack,Office Supplies,East,2,12.5,25
+ORD-10262,2024-06-25,RAM 32GB DDR5,Hardware,Central,3,139.5,418.5
+ORD-10263,2023-10-20,Wi-Fi 6 Router,Hardware,North,14,159,2226
+ORD-10264,2024-06-21,Stapler Heavy Duty,Office Supplies,East,15,24,360
+ORD-10265,2023-10-16,Wireless Headphones,Electronics,South,8,99.99,799.92
+ORD-10266,2024-03-09,Notebook A5,Office Supplies,North,9,8.95,80.55
+ORD-10267,2023-06-28,RAM 32GB DDR5,Hardware,East,11,139.5,1534.5
+ORD-10268,2023-11-13,4K Monitor,Electronics,Central,15,349.5,5242.5
+ORD-10269,2024-02-22,Wi-Fi 6 Router,Hardware,West,5,159,795
+ORD-10270,2023-08-29,Standing Desk,Furniture,Central,13,499,6487
+ORD-10271,2023-03-26,Paper Ream,Office Supplies,East,11,18,198
+ORD-10272,2023-02-04,Standing Desk,Furniture,East,6,499,2994
+ORD-10273,2023-06-11,Notebook A5,Office Supplies,West,5,8.95,44.75
+ORD-10274,2023-07-24,4K Monitor,Electronics,East,5,349.5,1747.5
+ORD-10275,2023-06-13,Bookshelf,Furniture,Central,2,149,298
+ORD-10276,2023-08-27,Stapler Heavy Duty,Office Supplies,North,13,24,312
+ORD-10277,2023-01-05,Ergonomic Chair,Furniture,East,15,299,4485
+ORD-10278,2023-12-18,USB-C Dock,Electronics,West,7,79.95,559.65
+ORD-10279,2023-06-05,Stapler Heavy Duty,Office Supplies,South,14,24,336
+ORD-10280,2023-06-21,4K Monitor,Electronics,South,9,349.5,3145.5
+ORD-10281,2024-04-14,Ergonomic Chair,Furniture,North,11,299,3289
+ORD-10282,2024-01-03,Standing Desk,Furniture,East,8,499,3992
+ORD-10283,2023-04-12,Notebook A5,Office Supplies,Central,12,8.95,107.4
+ORD-10284,2024-05-15,Notebook A5,Office Supplies,North,2,8.95,17.9
+ORD-10285,2023-11-20,Bookshelf,Furniture,East,11,149,1639
+ORD-10286,2023-06-07,RAM 32GB DDR5,Hardware,South,14,139.5,1953
+ORD-10287,2023-06-01,Bookshelf,Furniture,West,7,149,1043
+ORD-10288,2024-03-09,Desk Lamp,Furniture,Central,15,45,675
+ORD-10289,2023-04-02,Paper Ream,Office Supplies,Central,4,18,72
+ORD-10290,2024-05-27,Webcam Pro,Electronics,East,8,69,552
+ORD-10291,2024-01-02,Standing Desk,Furniture,Central,9,499,4491
+ORD-10292,2024-03-12,Wireless Headphones,Electronics,South,1,99.99,99.99
+ORD-10293,2024-02-18,SSD 1TB NVMe,Hardware,West,1,109.99,109.99
+ORD-10294,2023-07-01,Stapler Heavy Duty,Office Supplies,East,12,24,288
+ORD-10295,2024-03-21,Desk Lamp,Furniture,West,6,45,270
+ORD-10296,2023-04-09,Ergonomic Chair,Furniture,South,11,299,3289
+ORD-10297,2023-05-11,Notebook A5,Office Supplies,Central,7,8.95,62.65
+ORD-10298,2024-05-22,Gel Pens Pack,Office Supplies,Central,11,12.5,137.5
+ORD-10299,2023-01-11,Wi-Fi 6 Router,Hardware,North,14,159,2226
+ORD-10300,2024-03-31,  USB-C Dock ,Electronics,West,8,79.95,639.6
+ORD-10301,2023-10-08,RAM 32GB DDR5,Hardware,West,2,139.5,279
+ORD-10302,2023-01-01,Wireless Headphones,Electronics,West,10,99.99,999.9
+ORD-10303,2023-07-21,USB-C Dock,Electronics,South,3,79.95,239.85
+ORD-10304,2023-02-22,Webcam Pro,Electronics,North,11,69,759
+ORD-10305,2023-03-16,Notebook A5,Office Supplies,West,12,8.95,107.4
+ORD-10306,2023-04-16,USB-C Dock,Electronics,North,2,79.95,159.9
+ORD-10307,2024-01-15,Webcam Pro,Electronics,North,7,69,483
+ORD-10308,2023-11-16,USB-C Dock,Electronics,South,2,79.95,159.9
+ORD-10309,2023-01-12,4K Monitor,Electronics,West,13,349.5,4543.5
+ORD-10310,2024-04-01,Gel Pens Pack,Office Supplies,East,6,12.5,75
+ORD-10311,2023-09-13,Desk Lamp,Furniture,North,11,45,495
+ORD-10312,2024-06-27,4K Monitor,Electronics,North,6,349.5,2097
+ORD-10313,2023-05-20,Notebook A5,Office Supplies,South,15,8.95,134.25
+ORD-10314,2023-08-05,Stapler Heavy Duty,Office Supplies,West,8,24,192
+ORD-10315,2024-03-01,Paper Ream,Office Supplies,North,3,18,54
+ORD-10316,2024-04-09,Paper Ream,Office Supplies,North,10,18,180
+ORD-10317,2023-05-30,USB-C Dock,Electronics,North,9,79.95,719.55
+ORD-10318,2024-03-27,Paper Ream,Office Supplies,West,4,18,72
+ORD-10319,2024-02-28,Ergonomic Chair,Furniture,North,15,299,4485
+ORD-10320,2023-11-28,Wi-Fi 6 Router,Hardware,West,3,159,477
+ORD-10321,2024-05-12,SSD 1TB NVMe,Hardware,West,5,109.99,549.95
+ORD-10322,2024-02-04,RAM 32GB DDR5,Hardware,Central,1,139.5,139.5
+ORD-10323,2023-04-24,RAM 32GB DDR5,Hardware,West,15,139.5,2092.5
+ORD-10324,2023-12-15,Wireless Headphones,Electronics,West,11,99.99,1099.89
+ORD-10325,2023-02-26,Wi-Fi 6 Router,Hardware,West,7,159,1113
+ORD-10326,2023-11-13,Gel Pens Pack,Office Supplies,East,8,12.5,100
+ORD-10327,2024-06-20,Wi-Fi 6 Router,Hardware,North,14,159,2226
+ORD-10328,2024-06-02,Webcam Pro,Electronics,West,2,69,138
+ORD-10329,2023-05-17,4K Monitor,Electronics,East,12,349.5,4194
+ORD-10330,2023-07-27,Stapler Heavy Duty,Office Supplies,South,14,24,336
+ORD-10331,2024-03-27,SSD 1TB NVMe,Hardware,South,10,109.99,1099.9
+ORD-10332,2024-01-24,Desk Lamp,Furniture,West,12,45,540
+ORD-10333,2023-09-29,Gel Pens Pack,Office Supplies,North,4,12.5,50
+ORD-10334,2023-11-08,Bookshelf,Furniture,Central,8,149,1192
+ORD-10335,2023-10-09,SSD 1TB NVMe,Hardware,South,5,109.99,549.95
+ORD-10336,2024-05-07,RAM 32GB DDR5,Hardware,North,11,139.5,1534.5
+ORD-10337,2023-09-17,Standing Desk,Furniture,South,8,499,3992
+ORD-10338,2023-01-18,USB-C Dock,Electronics,Central,5,79.95,399.75
+ORD-10339,2023-05-12,Wireless Headphones,Electronics,Central,11,99.99,1099.89
+ORD-10340,2024-01-12,Webcam Pro,Electronics,West,9,69,621
+ORD-10341,2023-05-03,Stapler Heavy Duty,Office Supplies,North,9,24,216
+ORD-10342,2023-09-03,Notebook A5,Office Supplies,West,12,8.95,107.4
+ORD-10343,2023-01-29,Gel Pens Pack,Office Supplies,South,14,12.5,175
+ORD-10344,2023-07-02,Mechanical Keyboard,Electronics,West,3,129,387
+ORD-10345,2023-07-22,Gel Pens Pack,Office Supplies,West,6,12.5,75
+ORD-10346,2023-09-19,Bookshelf,Furniture,South,3,149,447
+ORD-10347,2023-09-30,Wi-Fi 6 Router,Hardware,Central,7,159,1113
+ORD-10348,2024-01-27,Desk Lamp,Furniture,West,10,45,450
+ORD-10349,2024-02-24,SSD 1TB NVMe,Hardware,West,2,109.99,219.98
+ORD-10350,2023-08-11,  Desk Lamp ,Furniture,Central,9,45,405
+ORD-10351,2024-04-10,Wireless Headphones,Electronics,North,4,99.99,399.96
+ORD-10352,2024-03-18,Ergonomic Chair,Furniture,South,4,299,1196
+ORD-10353,2023-03-26,Wireless Headphones,Electronics,North,2,99.99,199.98
+ORD-10354,2023-05-26,Wireless Headphones,Electronics,East,7,99.99,699.93
+ORD-10355,2023-11-10,4K Monitor,Electronics,North,3,349.5,1048.5
+ORD-10356,2024-01-08,SSD 1TB NVMe,Hardware,West,9,109.99,989.91
+ORD-10357,2023-11-17,USB-C Dock,Electronics,North,15,79.95,1199.25
+ORD-10358,2023-11-29,Standing Desk,Furniture,East,13,499,6487
+ORD-10359,2024-05-04,RAM 32GB DDR5,Hardware,Central,14,139.5,1953
+ORD-10360,2024-04-04,4K Monitor,Electronics,Central,11,349.5,3844.5
+ORD-10361,2023-12-15,Gel Pens Pack,Office Supplies,Central,3,12.5,37.5
+ORD-10362,2023-08-05,Mechanical Keyboard,Electronics,Central,7,129,903
+ORD-10363,2023-12-31,Notebook A5,Office Supplies,South,3,8.95,26.85
+ORD-10364,2023-01-13,Mechanical Keyboard,Electronics,South,13,129,1677
+ORD-10365,2024-01-04,RAM 32GB DDR5,Hardware,North,13,139.5,1813.5
+ORD-10366,2024-01-12,4K Monitor,Electronics,South,6,349.5,2097
+ORD-10367,2024-04-08,USB-C Dock,Electronics,Central,11,79.95,879.45
+ORD-10368,2024-01-28,RAM 32GB DDR5,Hardware,South,12,139.5,1674
+ORD-10369,2024-01-09,Desk Lamp,Furniture,West,4,45,180
+ORD-10370,2023-03-05,Webcam Pro,Electronics,North,15,69,1035
+ORD-10371,2023-06-20,Gel Pens Pack,Office Supplies,Central,14,12.5,175
+ORD-10372,2023-02-07,Paper Ream,Office Supplies,Central,12,18,216
+ORD-10373,2023-08-28,Standing Desk,Furniture,South,9,499,4491
+ORD-10374,2023-06-17,Wi-Fi 6 Router,Hardware,West,2,159,318
+ORD-10375,2024-03-21,USB-C Dock,Electronics,North,11,79.95,879.45
+ORD-10376,2024-04-29,Mechanical Keyboard,Electronics,South,9,129,1161
+ORD-10377,2023-01-04,Gel Pens Pack,Office Supplies,East,2,12.5,25
+ORD-10378,2024-02-12,Paper Ream,Office Supplies,Central,3,18,54
+ORD-10379,2023-06-16,USB-C Dock,Electronics,North,4,79.95,319.8
+ORD-10380,2024-06-09,Notebook A5,Office Supplies,East,7,8.95,62.65
+ORD-10381,2024-04-28,Paper Ream,Office Supplies,South,9,18,162
+ORD-10382,2024-02-22,Stapler Heavy Duty,Office Supplies,Central,5,24,120
+ORD-10383,2024-05-23,USB-C Dock,Electronics,East,14,79.95,1119.3
+ORD-10384,2024-05-05,Notebook A5,Office Supplies,South,1,8.95,8.95
+ORD-10385,2023-05-20,Mechanical Keyboard,Electronics,North,15,129,1935
+ORD-10386,2023-11-17,Paper Ream,Office Supplies,South,3,18,54
+ORD-10387,2023-08-26,Ergonomic Chair,Furniture,Central,1,299,299
+ORD-10388,2023-03-15,Mechanical Keyboard,Electronics,East,10,129,1290
+ORD-10389,2023-03-14,SSD 1TB NVMe,Hardware,West,4,109.99,439.96
+ORD-10390,2024-01-12,Gel Pens Pack,Office Supplies,Central,3,12.5,37.5
+ORD-10391,2024-02-16,Bookshelf,Furniture,West,1,149,149
+ORD-10392,2024-05-16,Webcam Pro,Electronics,South,11,69,759
+ORD-10393,2023-08-23,SSD 1TB NVMe,Hardware,South,11,109.99,1209.89
+ORD-10394,2024-04-22,Standing Desk,Furniture,Central,13,499,6487
+ORD-10395,2023-01-23,Desk Lamp,Furniture,North,3,45,135
+ORD-10396,2023-07-10,Webcam Pro,Electronics,East,9,69,621
+ORD-10397,2023-04-24,USB-C Dock,Electronics,East,11,79.95,879.45
+ORD-10398,2024-03-04,Paper Ream,Office Supplies,Central,11,18,198
+ORD-10399,2023-09-07,Paper Ream,Office Supplies,Central,10,18,180
+ORD-10400,2024-03-13,  RAM 32GB DDR5 ,Hardware,North,11,139.5,1534.5
+ORD-10401,2023-11-22,USB-C Dock,Electronics,West,7,79.95,559.65
+ORD-10402,2024-03-20,Wireless Headphones,Electronics,South,10,99.99,999.9
+ORD-10403,2023-07-19,Webcam Pro,Electronics,Central,3,69,207
+ORD-10404,2023-06-16,USB-C Dock,Electronics,South,13,79.95,1039.35
+ORD-10405,2023-04-15,Ergonomic Chair,Furniture,Central,6,299,1794
+ORD-10406,2023-12-05,Standing Desk,Furniture,Central,4,499,1996
+ORD-10407,2024-04-16,Wi-Fi 6 Router,Hardware,North,12,159,1908
+ORD-10408,2024-01-31,SSD 1TB NVMe,Hardware,South,14,109.99,1539.86
+ORD-10409,2024-05-17,Wi-Fi 6 Router,Hardware,West,10,159,1590
+ORD-10410,2023-12-29,Standing Desk,Furniture,West,7,499,3493
+ORD-10411,2024-02-05,Bookshelf,Furniture,North,12,149,1788
+ORD-10412,2024-03-12,Desk Lamp,Furniture,East,3,45,135
+ORD-10413,2023-12-18,Bookshelf,Furniture,South,12,149,1788
+ORD-10414,2023-10-12,Paper Ream,Office Supplies,East,8,18,144
+ORD-10415,2023-05-25,Wireless Headphones,Electronics,East,7,99.99,699.93
+ORD-10416,2023-07-29,Bookshelf,Furniture,North,9,149,1341
+ORD-10417,2023-01-10,RAM 32GB DDR5,Hardware,North,1,139.5,139.5
+ORD-10418,2024-04-27,Paper Ream,Office Supplies,Central,11,18,198
+ORD-10419,2023-10-19,RAM 32GB DDR5,Hardware,East,6,139.5,837
+ORD-10420,2023-09-09,Desk Lamp,Furniture,Central,7,45,315
+ORD-10421,2023-07-20,Ergonomic Chair,Furniture,Central,2,299,598
+ORD-10422,2023-09-21,Stapler Heavy Duty,Office Supplies,West,15,24,360
+ORD-10423,2023-02-07,Stapler Heavy Duty,Office Supplies,East,5,24,120
+ORD-10424,2024-02-17,Bookshelf,Furniture,South,2,149,298
+ORD-10425,2023-11-29,Gel Pens Pack,Office Supplies,North,12,12.5,150
+ORD-10426,2023-07-11,Stapler Heavy Duty,Office Supplies,West,15,24,360
+ORD-10427,2023-01-13,Wireless Headphones,Electronics,South,11,99.99,1099.89
+ORD-10428,2023-01-21,Stapler Heavy Duty,Office Supplies,West,1,24,24
+ORD-10429,2023-09-11,Wireless Headphones,Electronics,North,4,99.99,399.96
+ORD-10430,2023-04-06,SSD 1TB NVMe,Hardware,East,10,109.99,1099.9
+ORD-10431,2023-05-18,Bookshelf,Furniture,North,2,149,298
+ORD-10432,2023-08-16,Webcam Pro,Electronics,East,7,69,483
+ORD-10433,2023-09-26,Ergonomic Chair,Furniture,Central,5,299,1495
+ORD-10434,2023-12-14,Webcam Pro,Electronics,South,1,69,69
+ORD-10435,2024-05-25,Gel Pens Pack,Office Supplies,West,10,12.5,125
+ORD-10436,2023-05-16,Wi-Fi 6 Router,Hardware,North,2,159,318
+ORD-10437,2024-01-24,Gel Pens Pack,Office Supplies,Central,11,12.5,137.5
+ORD-10438,2024-06-27,Standing Desk,Furniture,South,13,499,6487
+ORD-10439,2023-12-09,Wi-Fi 6 Router,Hardware,North,14,159,2226
+ORD-10440,2023-08-23,Ergonomic Chair,Furniture,Central,5,299,1495
+ORD-10441,2024-03-22,RAM 32GB DDR5,Hardware,South,13,139.5,1813.5
+ORD-10442,2023-07-04,Wi-Fi 6 Router,Hardware,West,5,159,795
+ORD-10443,2024-05-06,Wi-Fi 6 Router,Hardware,West,11,159,1749
+ORD-10444,2023-04-24,Gel Pens Pack,Office Supplies,West,1,12.5,12.5
+ORD-10445,2023-05-22,Webcam Pro,Electronics,South,5,69,345
+ORD-10446,2023-04-15,SSD 1TB NVMe,Hardware,East,12,109.99,1319.88
+ORD-10447,2024-05-21,USB-C Dock,Electronics,South,15,79.95,1199.25
+ORD-10448,2024-03-09,4K Monitor,Electronics,North,4,349.5,1398
+ORD-10449,2024-01-18,RAM 32GB DDR5,Hardware,North,7,139.5,976.5
+ORD-10450,2023-09-22,  Mechanical Keyboard ,Electronics,Central,4,129,516
+ORD-10451,2024-01-14,Paper Ream,Office Supplies,Central,2,18,36
+ORD-10452,2023-08-03,Stapler Heavy Duty,Office Supplies,West,15,24,360
+ORD-10453,2023-12-08,Gel Pens Pack,Office Supplies,Central,10,12.5,125
+ORD-10454,2023-01-19,Standing Desk,Furniture,Central,13,499,6487
+ORD-10455,2024-01-14,SSD 1TB NVMe,Hardware,South,14,109.99,1539.86
+ORD-10456,2023-09-02,Desk Lamp,Furniture,Central,9,45,405
+ORD-10457,2023-03-02,Ergonomic Chair,Furniture,West,5,299,1495
+ORD-10458,2023-01-01,Desk Lamp,Furniture,West,3,45,135
+ORD-10459,2023-05-27,USB-C Dock,Electronics,West,10,79.95,799.5
+ORD-10460,2023-04-17,Wi-Fi 6 Router,Hardware,Central,1,159,159
+ORD-10461,2023-01-07,Wi-Fi 6 Router,Hardware,Central,10,159,1590
+ORD-10462,2023-02-08,Wireless Headphones,Electronics,West,13,99.99,1299.87
+ORD-10463,2024-06-18,Paper Ream,Office Supplies,East,2,18,36
+ORD-10464,2024-04-09,SSD 1TB NVMe,Hardware,East,2,109.99,219.98
+ORD-10465,2023-02-28,RAM 32GB DDR5,Hardware,Central,4,139.5,558
+ORD-10466,2023-05-05,Wi-Fi 6 Router,Hardware,East,6,159,954
+ORD-10467,2023-12-10,Paper Ream,Office Supplies,North,7,18,126
+ORD-10468,2023-01-08,4K Monitor,Electronics,Central,10,349.5,3495
+ORD-10469,2024-05-24,Stapler Heavy Duty,Office Supplies,West,5,24,120
+ORD-10470,2023-08-22,Wi-Fi 6 Router,Hardware,West,14,159,2226
+ORD-10471,2024-04-21,Wireless Headphones,Electronics,East,2,99.99,199.98
+ORD-10472,2023-02-27,Wi-Fi 6 Router,Hardware,West,7,159,1113
+ORD-10473,2023-07-17,Notebook A5,Office Supplies,South,1,8.95,8.95
+ORD-10474,2023-10-08,SSD 1TB NVMe,Hardware,South,7,109.99,769.93
+ORD-10475,2023-10-01,Gel Pens Pack,Office Supplies,North,3,12.5,37.5
+ORD-10476,2024-05-22,RAM 32GB DDR5,Hardware,West,2,139.5,279
+ORD-10477,2023-03-25,Paper Ream,Office Supplies,South,5,18,90
+ORD-10478,2023-04-09,Stapler Heavy Duty,Office Supplies,West,6,24,144
+ORD-10479,2024-03-28,Standing Desk,Furniture,Central,9,499,4491
+ORD-10480,2024-01-02,Ergonomic Chair,Furniture,South,7,299,2093
+ORD-10481,2023-01-08,Webcam Pro,Electronics,Central,15,69,1035
+ORD-10482,2024-04-14,RAM 32GB DDR5,Hardware,West,11,139.5,1534.5
+ORD-10483,2024-03-20,Wireless Headphones,Electronics,Central,2,99.99,199.98
+ORD-10484,2024-05-22,Stapler Heavy Duty,Office Supplies,South,9,24,216
+ORD-10485,2024-05-27,Standing Desk,Furniture,Central,13,499,6487
+ORD-10486,2024-03-04,Ergonomic Chair,Furniture,South,8,299,2392
+ORD-10487,2024-03-13,Ergonomic Chair,Furniture,South,4,299,1196
+ORD-10488,2023-11-27,Ergonomic Chair,Furniture,Central,7,299,2093
+ORD-10489,2024-03-23,USB-C Dock,Electronics,South,7,79.95,559.65
+ORD-10490,2023-12-18,Stapler Heavy Duty,Office Supplies,West,15,24,360
+ORD-10491,2023-01-06,Paper Ream,Office Supplies,West,1,18,18
+ORD-10492,2024-01-19,4K Monitor,Electronics,North,7,349.5,2446.5
+ORD-10493,2023-12-08,Wi-Fi 6 Router,Hardware,Central,9,159,1431
+ORD-10494,2023-11-08,Stapler Heavy Duty,Office Supplies,East,8,24,192
+ORD-10495,2023-04-23,Ergonomic Chair,Furniture,North,2,299,598
+ORD-10496,2023-08-08,Standing Desk,Furniture,West,15,499,7485
+ORD-10497,2023-12-10,USB-C Dock,Electronics,South,4,79.95,319.8
+ORD-10498,2023-07-28,Mechanical Keyboard,Electronics,East,15,129,1935
+ORD-10499,2023-03-18,Notebook A5,Office Supplies,South,11,8.95,98.45
+ORD-10500,2024-06-19,  Webcam Pro ,Electronics,North,12,69,828
+ORD-10501,2023-09-26,Ergonomic Chair,Furniture,South,2,299,598
+ORD-10502,2023-06-13,USB-C Dock,Electronics,South,4,79.95,319.8
+ORD-10503,2024-01-11,SSD 1TB NVMe,Hardware,South,13,109.99,1429.87
+ORD-10504,2023-07-21,RAM 32GB DDR5,Hardware,North,12,139.5,1674
+ORD-10505,2023-04-01,SSD 1TB NVMe,Hardware,East,14,109.99,1539.86
+ORD-10506,2023-11-13,Webcam Pro,Electronics,Central,12,69,828
+ORD-10507,2024-03-15,Wi-Fi 6 Router,Hardware,East,1,159,159
+ORD-10508,2023-09-17,Stapler Heavy Duty,Office Supplies,East,7,24,168
+ORD-10509,2024-06-01,Notebook A5,Office Supplies,West,9,8.95,80.55
+ORD-10510,2024-03-03,RAM 32GB DDR5,Hardware,Central,1,139.5,139.5
+ORD-10511,2024-01-18,RAM 32GB DDR5,Hardware,North,15,139.5,2092.5
+ORD-10512,2023-11-09,Paper Ream,Office Supplies,North,14,18,252
+ORD-10513,2023-03-10,Standing Desk,Furniture,North,10,499,4990
+ORD-10514,2023-12-04,Notebook A5,Office Supplies,North,2,8.95,17.9
+ORD-10515,2024-04-23,RAM 32GB DDR5,Hardware,South,5,139.5,697.5
+ORD-10516,2023-07-02,Wi-Fi 6 Router,Hardware,North,3,159,477
+ORD-10517,2023-01-25,Webcam Pro,Electronics,South,2,69,138
+ORD-10518,2023-11-05,USB-C Dock,Electronics,North,9,79.95,719.55
+ORD-10519,2024-05-04,Standing Desk,Furniture,East,1,499,499
+ORD-10520,2023-07-11,Wireless Headphones,Electronics,West,12,99.99,1199.88
+ORD-10521,2023-11-13,Gel Pens Pack,Office Supplies,North,13,12.5,162.5
+ORD-10522,2024-02-05,Paper Ream,Office Supplies,West,3,18,54
+ORD-10523,2023-02-01,Stapler Heavy Duty,Office Supplies,Central,11,24,264
+ORD-10524,2023-04-19,Wireless Headphones,Electronics,North,15,99.99,1499.85
+ORD-10525,2023-06-02,Bookshelf,Furniture,North,6,149,894
+ORD-10526,2023-12-30,Webcam Pro,Electronics,East,7,69,483
+ORD-10527,2023-07-01,Notebook A5,Office Supplies,East,8,8.95,71.6
+ORD-10528,2023-08-02,Mechanical Keyboard,Electronics,South,11,129,1419
+ORD-10529,2024-01-19,Paper Ream,Office Supplies,West,8,18,144
+ORD-10530,2023-01-15,Paper Ream,Office Supplies,North,13,18,234
+ORD-10531,2023-05-09,Desk Lamp,Furniture,West,10,45,450
+ORD-10532,2024-03-11,Gel Pens Pack,Office Supplies,Central,6,12.5,75
+ORD-10533,2024-01-31,Mechanical Keyboard,Electronics,East,4,129,516
+ORD-10534,2023-08-01,Desk Lamp,Furniture,South,15,45,675
+ORD-10535,2023-09-26,Standing Desk,Furniture,West,10,499,4990
+ORD-10536,2023-07-11,Webcam Pro,Electronics,West,7,69,483
+ORD-10537,2024-03-12,Gel Pens Pack,Office Supplies,East,7,12.5,87.5
+ORD-10538,2023-11-04,Mechanical Keyboard,Electronics,East,10,129,1290
+ORD-10539,2023-12-28,Wi-Fi 6 Router,Hardware,North,7,159,1113
+ORD-10540,2023-03-06,Bookshelf,Furniture,North,2,149,298
+ORD-10541,2023-09-16,SSD 1TB NVMe,Hardware,South,9,109.99,989.91
+ORD-10542,2023-04-12,RAM 32GB DDR5,Hardware,East,3,139.5,418.5
+ORD-10543,2023-02-28,Standing Desk,Furniture,South,9,499,4491
+ORD-10544,2023-02-09,Stapler Heavy Duty,Office Supplies,South,9,24,216
+ORD-10545,2023-12-23,SSD 1TB NVMe,Hardware,Central,1,109.99,109.99
+ORD-10546,2023-10-07,Ergonomic Chair,Furniture,West,2,299,598
+ORD-10547,2024-05-25,4K Monitor,Electronics,Central,10,349.5,3495
+ORD-10548,2023-03-15,SSD 1TB NVMe,Hardware,South,15,109.99,1649.85
+ORD-10549,2023-07-30,RAM 32GB DDR5,Hardware,South,13,139.5,1813.5
+ORD-10550,2023-11-23,  SSD 1TB NVMe ,Hardware,West,14,109.99,1539.86
+ORD-10551,2024-03-19,Desk Lamp,Furniture,Central,7,45,315
+ORD-10552,2023-06-27,Webcam Pro,Electronics,North,5,69,345
+ORD-10553,2023-04-11,Desk Lamp,Furniture,North,8,45,360
+ORD-10554,2023-07-22,Webcam Pro,Electronics,East,2,69,138
+ORD-10555,2024-03-12,Webcam Pro,Electronics,East,13,69,897
+ORD-10556,2023-02-20,Notebook A5,Office Supplies,West,7,8.95,62.65
+ORD-10557,2023-03-24,Mechanical Keyboard,Electronics,South,3,129,387
+ORD-10558,2023-05-12,SSD 1TB NVMe,Hardware,North,2,109.99,219.98
+ORD-10559,2023-11-16,Paper Ream,Office Supplies,West,8,18,144
+ORD-10560,2023-03-20,SSD 1TB NVMe,Hardware,South,1,109.99,109.99
+ORD-10561,2023-08-18,Bookshelf,Furniture,South,13,149,1937
+ORD-10562,2023-05-09,RAM 32GB DDR5,Hardware,North,12,139.5,1674
+ORD-10563,2024-02-20,RAM 32GB DDR5,Hardware,North,7,139.5,976.5
+ORD-10564,2023-07-23,Standing Desk,Furniture,West,10,499,4990
+ORD-10565,2024-01-05,Standing Desk,Furniture,North,15,499,7485
+ORD-10566,2024-04-15,Webcam Pro,Electronics,Central,3,69,207
+ORD-10567,2023-01-16,Gel Pens Pack,Office Supplies,West,8,12.5,100
+ORD-10568,2024-01-18,Standing Desk,Furniture,North,7,499,3493
+ORD-10569,2024-03-01,RAM 32GB DDR5,Hardware,West,3,139.5,418.5
+ORD-10570,2023-03-14,4K Monitor,Electronics,West,11,349.5,3844.5
+ORD-10571,2023-10-01,Ergonomic Chair,Furniture,Central,2,299,598
+ORD-10572,2024-05-07,Mechanical Keyboard,Electronics,North,1,129,129
+ORD-10573,2024-02-19,Desk Lamp,Furniture,North,6,45,270
+ORD-10574,2023-09-13,Mechanical Keyboard,Electronics,East,10,129,1290
+ORD-10575,2023-08-29,Notebook A5,Office Supplies,North,11,8.95,98.45
+ORD-10576,2024-02-19,Bookshelf,Furniture,North,7,149,1043
+ORD-10577,2023-12-31,Stapler Heavy Duty,Office Supplies,South,13,24,312
+ORD-10578,2023-08-24,Ergonomic Chair,Furniture,West,3,299,897
+ORD-10579,2023-03-10,SSD 1TB NVMe,Hardware,North,15,109.99,1649.85
+ORD-10580,2023-03-10,Bookshelf,Furniture,South,14,149,2086
+ORD-10581,2023-02-26,SSD 1TB NVMe,Hardware,South,9,109.99,989.91
+ORD-10582,2023-09-28,SSD 1TB NVMe,Hardware,South,7,109.99,769.93
+ORD-10583,2024-01-22,Webcam Pro,Electronics,East,10,69,690
+ORD-10584,2024-01-10,Webcam Pro,Electronics,West,8,69,552
+ORD-10585,2023-07-27,SSD 1TB NVMe,Hardware,South,13,109.99,1429.87
+ORD-10586,2023-06-11,Bookshelf,Furniture,East,4,149,596
+ORD-10587,2023-04-22,Mechanical Keyboard,Electronics,Central,4,129,516
+ORD-10588,2023-11-02,Paper Ream,Office Supplies,West,8,18,144
+ORD-10589,2023-12-08,Mechanical Keyboard,Electronics,West,7,129,903
+ORD-10590,2023-02-04,USB-C Dock,Electronics,South,8,79.95,639.6
+ORD-10591,2023-01-11,Desk Lamp,Furniture,East,14,45,630
+ORD-10592,2023-01-07,Mechanical Keyboard,Electronics,Central,13,129,1677
+ORD-10593,2023-06-30,Bookshelf,Furniture,West,2,149,298
+ORD-10594,2023-04-29,Paper Ream,Office Supplies,North,8,18,144
+ORD-10595,2023-12-15,SSD 1TB NVMe,Hardware,North,3,109.99,329.97
+ORD-10596,2024-04-29,Webcam Pro,Electronics,North,6,69,414
+ORD-10597,2023-02-19,Gel Pens Pack,Office Supplies,Central,11,12.5,137.5
+ORD-10598,2023-06-01,Gel Pens Pack,Office Supplies,West,1,12.5,12.5
+ORD-10599,2023-07-24,Webcam Pro,Electronics,East,8,69,552
+ORD-10600,2023-11-14,  Bookshelf ,Furniture,East,3,149,447
+ORD-10601,2023-11-15,Webcam Pro,Electronics,Central,15,69,1035
+ORD-10602,2023-11-23,RAM 32GB DDR5,Hardware,South,13,139.5,1813.5
+ORD-10603,2023-06-28,Notebook A5,Office Supplies,North,5,8.95,44.75
+ORD-10604,2023-12-10,USB-C Dock,Electronics,North,2,79.95,159.9
+ORD-10605,2023-01-21,Mechanical Keyboard,Electronics,East,10,129,1290
+ORD-10606,2023-11-20,Mechanical Keyboard,Electronics,North,15,129,1935
+ORD-10607,2024-05-15,Webcam Pro,Electronics,West,7,69,483
+ORD-10608,2023-05-12,Notebook A5,Office Supplies,North,14,8.95,125.3
+ORD-10609,2024-01-14,Gel Pens Pack,Office Supplies,South,9,12.5,112.5
+ORD-10610,2023-08-11,4K Monitor,Electronics,South,11,349.5,3844.5
+ORD-10611,2023-12-27,SSD 1TB NVMe,Hardware,East,5,109.99,549.95
+ORD-10612,2023-07-19,Wi-Fi 6 Router,Hardware,South,1,159,159
+ORD-10613,2023-01-25,Ergonomic Chair,Furniture,East,14,299,4186
+ORD-10614,2023-05-22,Standing Desk,Furniture,East,3,499,1497
+ORD-10615,2023-02-09,Desk Lamp,Furniture,South,2,45,90
+ORD-10616,2023-02-25,Webcam Pro,Electronics,South,9,69,621
+ORD-10617,2024-04-18,4K Monitor,Electronics,West,11,349.5,3844.5
+ORD-10618,2024-04-27,Gel Pens Pack,Office Supplies,South,7,12.5,87.5
+ORD-10619,2024-03-22,Bookshelf,Furniture,North,2,149,298
+ORD-10620,2023-10-20,Desk Lamp,Furniture,North,12,45,540
+ORD-10621,2023-06-06,Stapler Heavy Duty,Office Supplies,North,10,24,240
+ORD-10622,2024-03-12,Paper Ream,Office Supplies,East,1,18,18
+ORD-10623,2023-10-11,Wi-Fi 6 Router,Hardware,West,8,159,1272
+ORD-10624,2023-07-14,RAM 32GB DDR5,Hardware,South,5,139.5,697.5
+ORD-10625,2023-08-26,SSD 1TB NVMe,Hardware,South,15,109.99,1649.85
+ORD-10626,2023-06-27,Gel Pens Pack,Office Supplies,Central,9,12.5,112.5
+ORD-10627,2024-04-21,SSD 1TB NVMe,Hardware,Central,4,109.99,439.96
+ORD-10628,2024-03-02,Gel Pens Pack,Office Supplies,North,13,12.5,162.5
+ORD-10629,2023-08-16,Webcam Pro,Electronics,West,13,69,897
+ORD-10630,2023-11-13,Paper Ream,Office Supplies,South,12,18,216
+ORD-10631,2024-05-23,USB-C Dock,Electronics,South,1,79.95,79.95
+ORD-10632,2024-01-03,Webcam Pro,Electronics,Central,15,69,1035
+ORD-10633,2023-12-14,USB-C Dock,Electronics,South,15,79.95,1199.25
+ORD-10634,2024-05-11,Wireless Headphones,Electronics,Central,6,99.99,599.94
+ORD-10635,2024-01-31,Standing Desk,Furniture,North,14,499,6986
+ORD-10636,2024-04-22,SSD 1TB NVMe,Hardware,West,4,109.99,439.96
+ORD-10637,2024-02-12,RAM 32GB DDR5,Hardware,South,13,139.5,1813.5
+ORD-10638,2023-08-18,Stapler Heavy Duty,Office Supplies,North,4,24,96
+ORD-10639,2023-11-15,Notebook A5,Office Supplies,West,8,8.95,71.6
+ORD-10640,2023-03-16,USB-C Dock,Electronics,East,7,79.95,559.65
+ORD-10641,2024-01-22,Gel Pens Pack,Office Supplies,South,9,12.5,112.5
+ORD-10642,2023-12-01,Gel Pens Pack,Office Supplies,South,13,12.5,162.5
+ORD-10643,2024-03-30,RAM 32GB DDR5,Hardware,South,11,139.5,1534.5
+ORD-10644,2023-04-11,Paper Ream,Office Supplies,East,2,18,36
+ORD-10645,2024-02-20,RAM 32GB DDR5,Hardware,South,13,139.5,1813.5
+ORD-10646,2023-06-03,Stapler Heavy Duty,Office Supplies,North,1,24,24
+ORD-10647,2024-01-30,Standing Desk,Furniture,North,12,499,5988
+ORD-10648,2024-02-20,Ergonomic Chair,Furniture,West,6,299,1794
+ORD-10649,2023-06-13,Standing Desk,Furniture,East,2,499,998
+ORD-10650,2023-03-28,  USB-C Dock ,Electronics,West,15,79.95,1199.25
+ORD-10651,2024-02-19,Desk Lamp,Furniture,South,5,45,225
+ORD-10652,2024-02-02,Paper Ream,Office Supplies,East,14,18,252
+ORD-10653,2024-05-18,SSD 1TB NVMe,Hardware,West,10,109.99,1099.9
+ORD-10654,2023-01-01,Notebook A5,Office Supplies,South,15,8.95,134.25
+ORD-10655,2024-03-08,Desk Lamp,Furniture,West,9,45,405
+ORD-10656,2023-10-31,RAM 32GB DDR5,Hardware,Central,13,139.5,1813.5
+ORD-10657,2023-04-13,Notebook A5,Office Supplies,West,1,8.95,8.95
+ORD-10658,2023-01-28,Stapler Heavy Duty,Office Supplies,East,5,24,120
+ORD-10659,2023-10-23,Notebook A5,Office Supplies,Central,11,8.95,98.45
+ORD-10660,2024-02-22,SSD 1TB NVMe,Hardware,Central,9,109.99,989.91
+ORD-10661,2024-03-15,SSD 1TB NVMe,Hardware,North,2,109.99,219.98
+ORD-10662,2023-03-02,Webcam Pro,Electronics,Central,12,69,828
+ORD-10663,2023-08-23,Ergonomic Chair,Furniture,East,14,299,4186
+ORD-10664,2023-04-03,Ergonomic Chair,Furniture,North,13,299,3887
+ORD-10665,2023-06-23,Stapler Heavy Duty,Office Supplies,North,13,24,312
+ORD-10666,2023-12-25,Paper Ream,Office Supplies,West,15,18,270
+ORD-10667,2024-04-12,Standing Desk,Furniture,West,3,499,1497
+ORD-10668,2024-06-15,Stapler Heavy Duty,Office Supplies,North,4,24,96
+ORD-10669,2023-10-14,Bookshelf,Furniture,East,14,149,2086
+ORD-10670,2024-01-18,Gel Pens Pack,Office Supplies,Central,4,12.5,50
+ORD-10671,2023-06-22,Gel Pens Pack,Office Supplies,West,8,12.5,100
+ORD-10672,2023-02-15,RAM 32GB DDR5,Hardware,East,12,139.5,1674
+ORD-10673,2023-03-20,Paper Ream,Office Supplies,Central,3,18,54
+ORD-10674,2023-07-17,Paper Ream,Office Supplies,Central,10,18,180
+ORD-10675,2023-01-05,RAM 32GB DDR5,Hardware,Central,15,139.5,2092.5
+ORD-10676,2023-04-04,USB-C Dock,Electronics,North,4,79.95,319.8
+ORD-10677,2023-10-03,RAM 32GB DDR5,Hardware,North,4,139.5,558
+ORD-10678,2023-07-09,RAM 32GB DDR5,Hardware,East,4,139.5,558
+ORD-10679,2024-03-14,Stapler Heavy Duty,Office Supplies,Central,9,24,216
+ORD-10680,2023-07-19,Gel Pens Pack,Office Supplies,Central,7,12.5,87.5
+ORD-10681,2023-06-04,USB-C Dock,Electronics,Central,13,79.95,1039.35
+ORD-10682,2024-03-01,Stapler Heavy Duty,Office Supplies,East,5,24,120
+ORD-10683,2024-02-05,Gel Pens Pack,Office Supplies,North,2,12.5,25
+ORD-10684,2023-11-27,Gel Pens Pack,Office Supplies,North,7,12.5,87.5
+ORD-10685,2023-10-14,Paper Ream,Office Supplies,East,1,18,18
+ORD-10686,2023-03-03,Standing Desk,Furniture,Central,15,499,7485
+ORD-10687,2023-07-27,Bookshelf,Furniture,Central,7,149,1043
+ORD-10688,2023-01-03,Gel Pens Pack,Office Supplies,South,14,12.5,175
+ORD-10689,2023-09-28,SSD 1TB NVMe,Hardware,Central,12,109.99,1319.88
+ORD-10690,2023-01-17,Mechanical Keyboard,Electronics,East,13,129,1677
+ORD-10691,2024-03-15,Bookshelf,Furniture,South,15,149,2235
+ORD-10692,2024-03-19,SSD 1TB NVMe,Hardware,West,11,109.99,1209.89
+ORD-10693,2023-03-02,USB-C Dock,Electronics,South,5,79.95,399.75
+ORD-10694,2023-11-23,Wi-Fi 6 Router,Hardware,South,7,159,1113
+ORD-10695,2024-05-22,Desk Lamp,Furniture,West,14,45,630
+ORD-10696,2024-03-03,Notebook A5,Office Supplies,South,6,8.95,53.7
+ORD-10697,2024-06-09,Gel Pens Pack,Office Supplies,North,10,12.5,125
+ORD-10698,2023-02-08,RAM 32GB DDR5,Hardware,Central,8,139.5,1116
+ORD-10699,2023-09-09,Bookshelf,Furniture,West,13,149,1937
+ORD-10700,2023-01-18,  USB-C Dock ,Electronics,South,14,79.95,1119.3
+ORD-10701,2023-04-29,Wi-Fi 6 Router,Hardware,Central,7,159,1113
+ORD-10702,2023-02-08,Ergonomic Chair,Furniture,Central,1,299,299
+ORD-10703,2024-03-22,Stapler Heavy Duty,Office Supplies,West,12,24,288
+ORD-10704,2024-02-04,Paper Ream,Office Supplies,North,13,18,234
+ORD-10705,2024-04-26,Gel Pens Pack,Office Supplies,Central,8,12.5,100
+ORD-10706,2023-02-28,Desk Lamp,Furniture,East,14,45,630
+ORD-10707,2023-12-14,RAM 32GB DDR5,Hardware,East,5,139.5,697.5
+ORD-10708,2023-04-10,Paper Ream,Office Supplies,West,15,18,270
+ORD-10709,2023-05-07,Bookshelf,Furniture,North,5,149,745
+ORD-10710,2023-12-10,Mechanical Keyboard,Electronics,West,15,129,1935
+ORD-10711,2024-03-05,Wi-Fi 6 Router,Hardware,Central,15,159,2385
+ORD-10712,2023-03-16,Ergonomic Chair,Furniture,West,2,299,598
+ORD-10713,2023-07-26,Ergonomic Chair,Furniture,South,10,299,2990
+ORD-10714,2023-01-27,SSD 1TB NVMe,Hardware,Central,5,109.99,549.95
+ORD-10715,2023-01-11,RAM 32GB DDR5,Hardware,East,6,139.5,837
+ORD-10716,2023-08-09,Ergonomic Chair,Furniture,North,14,299,4186
+ORD-10717,2023-06-06,Ergonomic Chair,Furniture,West,15,299,4485
+ORD-10718,2023-09-12,Gel Pens Pack,Office Supplies,Central,6,12.5,75
+ORD-10719,2023-12-20,Standing Desk,Furniture,North,15,499,7485
+ORD-10720,2023-03-03,SSD 1TB NVMe,Hardware,East,6,109.99,659.94
+ORD-10721,2024-01-28,Ergonomic Chair,Furniture,East,9,299,2691
+ORD-10722,2023-01-20,Gel Pens Pack,Office Supplies,Central,4,12.5,50
+ORD-10723,2024-05-06,Paper Ream,Office Supplies,South,3,18,54
+ORD-10724,2023-03-30,USB-C Dock,Electronics,Central,13,79.95,1039.35
+ORD-10725,2024-05-01,Paper Ream,Office Supplies,North,5,18,90
+ORD-10726,2023-03-30,Paper Ream,Office Supplies,South,5,18,90
+ORD-10727,2024-03-20,Webcam Pro,Electronics,East,6,69,414
+ORD-10728,2024-02-07,Paper Ream,Office Supplies,South,1,18,18
+ORD-10729,2024-04-12,Bookshelf,Furniture,North,11,149,1639
+ORD-10730,2023-01-14,Bookshelf,Furniture,North,4,149,596
+ORD-10731,2024-04-14,Paper Ream,Office Supplies,East,5,18,90
+ORD-10732,2024-05-15,Gel Pens Pack,Office Supplies,North,14,12.5,175
+ORD-10733,2024-04-18,Bookshelf,Furniture,North,13,149,1937
+ORD-10734,2023-02-03,Stapler Heavy Duty,Office Supplies,West,10,24,240
+ORD-10735,2023-12-06,Stapler Heavy Duty,Office Supplies,North,6,24,144
+ORD-10736,2024-02-13,Gel Pens Pack,Office Supplies,West,11,12.5,137.5
+ORD-10737,2023-05-24,Desk Lamp,Furniture,West,11,45,495
+ORD-10738,2023-08-31,Wi-Fi 6 Router,Hardware,West,5,159,795
+ORD-10739,2023-05-14,RAM 32GB DDR5,Hardware,Central,9,139.5,1255.5
+ORD-10740,2023-07-06,SSD 1TB NVMe,Hardware,South,7,109.99,769.93
+ORD-10741,2023-11-24,Gel Pens Pack,Office Supplies,Central,4,12.5,50
+ORD-10742,2024-01-16,SSD 1TB NVMe,Hardware,West,8,109.99,879.92
+ORD-10743,2023-09-16,Mechanical Keyboard,Electronics,South,8,129,1032
+ORD-10744,2024-03-15,Mechanical Keyboard,Electronics,West,4,129,516
+ORD-10745,2023-02-22,4K Monitor,Electronics,North,1,349.5,349.5
+ORD-10746,2024-05-10,4K Monitor,Electronics,North,3,349.5,1048.5
+ORD-10747,2023-09-15,USB-C Dock,Electronics,North,6,79.95,479.7
+ORD-10748,2023-03-10,SSD 1TB NVMe,Hardware,Central,11,109.99,1209.89
+ORD-10749,2023-11-28,Notebook A5,Office Supplies,North,7,8.95,62.65
+ORD-10750,2023-06-09,  Gel Pens Pack ,Office Supplies,West,14,12.5,175
+ORD-10751,2024-03-09,Mechanical Keyboard,Electronics,Central,14,129,1806
+ORD-10752,2023-06-16,Standing Desk,Furniture,South,3,499,1497
+ORD-10753,2024-01-02,Wireless Headphones,Electronics,West,11,99.99,1099.89
+ORD-10754,2024-06-19,Stapler Heavy Duty,Office Supplies,Central,4,24,96
+ORD-10755,2023-03-18,Wireless Headphones,Electronics,East,10,99.99,999.9
+ORD-10756,2023-06-25,Paper Ream,Office Supplies,South,14,18,252
+ORD-10757,2023-08-12,Wireless Headphones,Electronics,East,5,99.99,499.95
+ORD-10758,2023-06-21,Wi-Fi 6 Router,Hardware,West,13,159,2067
+ORD-10759,2024-03-14,Gel Pens Pack,Office Supplies,Central,12,12.5,150
+ORD-10760,2024-02-28,Standing Desk,Furniture,East,14,499,6986
+ORD-10761,2023-05-10,Wi-Fi 6 Router,Hardware,South,15,159,2385
+ORD-10762,2023-01-16,Stapler Heavy Duty,Office Supplies,Central,12,24,288
+ORD-10763,2024-05-31,SSD 1TB NVMe,Hardware,East,7,109.99,769.93
+ORD-10764,2023-05-24,Wi-Fi 6 Router,Hardware,South,1,159,159
+ORD-10765,2024-02-01,Notebook A5,Office Supplies,Central,1,8.95,8.95
+ORD-10766,2023-02-20,4K Monitor,Electronics,South,5,349.5,1747.5
+ORD-10767,2023-02-16,4K Monitor,Electronics,West,3,349.5,1048.5
+ORD-10768,2024-03-23,RAM 32GB DDR5,Hardware,East,10,139.5,1395
+ORD-10769,2023-02-10,RAM 32GB DDR5,Hardware,East,10,139.5,1395
+ORD-10770,2023-03-01,Webcam Pro,Electronics,North,6,69,414
+ORD-10771,2023-08-25,Notebook A5,Office Supplies,North,14,8.95,125.3
+ORD-10772,2023-01-21,Stapler Heavy Duty,Office Supplies,Central,1,24,24
+ORD-10773,2024-06-16,Standing Desk,Furniture,West,7,499,3493
+ORD-10774,2023-10-01,Webcam Pro,Electronics,West,4,69,276
+ORD-10775,2024-06-25,Desk Lamp,Furniture,East,15,45,675
+ORD-10776,2023-12-06,Bookshelf,Furniture,West,11,149,1639
+ORD-10777,2024-05-09,Wireless Headphones,Electronics,Central,11,99.99,1099.89
+ORD-10778,2024-05-27,Standing Desk,Furniture,West,6,499,2994
+ORD-10779,2023-10-17,RAM 32GB DDR5,Hardware,East,1,139.5,139.5
+ORD-10780,2023-10-22,Bookshelf,Furniture,North,4,149,596
+ORD-10781,2023-02-16,Paper Ream,Office Supplies,Central,12,18,216
+ORD-10782,2024-01-18,Gel Pens Pack,Office Supplies,West,3,12.5,37.5
+ORD-10783,2024-04-04,Stapler Heavy Duty,Office Supplies,South,13,24,312
+ORD-10784,2023-01-13,Mechanical Keyboard,Electronics,East,7,129,903
+ORD-10785,2023-12-06,4K Monitor,Electronics,South,5,349.5,1747.5
+ORD-10786,2024-05-19,RAM 32GB DDR5,Hardware,North,9,139.5,1255.5
+ORD-10787,2024-05-15,Gel Pens Pack,Office Supplies,North,10,12.5,125
+ORD-10788,2023-02-03,Mechanical Keyboard,Electronics,North,7,129,903
+ORD-10789,2023-12-08,Standing Desk,Furniture,Central,7,499,3493
+ORD-10790,2024-06-04,Wi-Fi 6 Router,Hardware,East,12,159,1908
+ORD-10791,2024-05-25,4K Monitor,Electronics,Central,12,349.5,4194
+ORD-10792,2023-03-27,RAM 32GB DDR5,Hardware,West,11,139.5,1534.5
+ORD-10006,2023-09-12,SSD 1TB NVMe,Hardware,Central,1,109.99,109.99
+ORD-10013,2024-06-19,Standing Desk,Furniture,North,2,499,998
+ORD-10026,2023-05-20,Paper Ream,Office Supplies,North,9,18,162
+ORD-10046,2024-01-02,4K Monitor,Electronics,Central,10,349.5,3495
+ORD-10061,2023-02-03,Desk Lamp,Furniture,West,13,45,585
+ORD-10101,2023-07-18,Bookshelf,Furniture,Central,8,149,1192
+ORD-10151,2023-10-02,USB-C Dock,Electronics,North,9,79.95,719.55
+ORD-10201,2023-09-19,RAM 32GB DDR5,Hardware,South,3,139.5,418.5

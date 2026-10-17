@@ -1,0 +1,86 @@
+/*
+ * CSV Insight - Responsive Breakpoints & Mobile Adaptations
+ * Target viewports: 360px (mobile), 768px (tablet), 1280px+ (desktop)
+ */
+
+/* Mobile viewports (<= 768px) */
+@media (max-width: 768px) {
+  .app-sidebar {
+    display: none; /* Managed via offcanvas */
+  }
+
+  .top-navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .page-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .stats-strip {
+    flex-direction: column;
+  }
+
+  .stat-cell {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.85rem 1rem;
+  }
+
+  .stat-cell:last-child {
+    border-bottom: none;
+  }
+
+  .dropzone-container {
+    padding: 2.25rem 1rem;
+  }
+
+  .chart-card-canvas-wrapper {
+    height: 240px;
+  }
+
+  .table-responsive {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+  }
+}
+
+/* Very narrow mobile devices (<= 380px down to 360px) */
+@media (max-width: 380px) {
+  .brand-name {
+    font-size: 1.25rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.35rem;
+  }
+
+  .chart-card-canvas-wrapper {
+    height: 210px;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.65rem;
+  }
+}
+
+/* Large Desktop (>= 1280px) */
+@media (min-width: 1280px) {
+  .app-sidebar {
+    width: 250px;
+  }
+
+  .page-content {
+    padding: 2.5rem 3rem;
+    max-width: 1600px;
+  }
+}

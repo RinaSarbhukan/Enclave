@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' data: blob:;">
+  <meta name="description"
+    content="Enclave: Client-side dataset profiling, automated visualization, and data cleaning.">
+  <title>Enclave</title>
+
+  <!-- Google Fonts: Newsreader (Serif Display), IBM Plex Sans (UI Sans), IBM Plex Mono (Tabular Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Pinned CDN Assets with Exact SRI Hashes -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+
+  <!-- Core App Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+  <!-- Live Region for Screen Readers -->
+  <div class="visually-hidden" aria-live="polite" id="ariaLiveRegion"></div>
+
+  <!-- App Shell Container -->
+  <div class="app-container">
+
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main Navigation">
+      <div class="sidebar-header d-flex align-items-center justify-content-between">
+        <a href="#welcome" class="brand-title">
+          <span class="brand-dot"></span>
+          <span class="brand-name">Enclave</span>
+        </a>
+        <button class="btn btn-sm btn-link p-1 text-muted d-none d-md-flex sidebar-collapse-btn" id="sidebarCollapseBtn" title="Toggle Sidebar (Ctrl+B)" aria-label="Collapse sidebar">
+          <i class="bi bi-chevron-left" id="sidebarCollapseIcon"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#welcome" class="nav-link-custom active" id="navWelcome" title="Welcome">
+          <i class="bi bi-file-earmark-text"></i>
+          <span class="nav-label">Welcome</span>
+        </a>
+        <a href="#dashboard" class="nav-link-custom" id="navDashboard" title="Dashboard">
+          <i class="bi bi-grid-1x2"></i>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="#data" class="nav-link-custom" id="navData" title="Data Table">
+          <i class="bi bi-table"></i>
+          <span class="nav-label">Data Table</span>
+        </a>
+        <a href="#clean" class="nav-link-custom" id="navClean" title="Cleaning">
+          <i class="bi bi-sliders"></i>
+          <span class="nav-label">Cleaning</span>
+          <span class="badge-counter" id="cleanBadgeCounter">0</span>
+        </a>
+        <a href="#export" class="nav-link-custom" id="navExport" title="Export">
+          <i class="bi bi-download"></i>
+          <span class="nav-label">Export</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="text-faint small mb-1 sidebar-footer-text">Compute: Client-side</div>
+        <div class="text-faint small sidebar-footer-text">Data remains on your device.</div>
+      </div>
+    </aside>
+    <!-- Draggable Sidebar Resizer Splitter -->
+    <div class="sidebar-resizer d-none d-md-block" id="sidebarResizer" title="Drag to resize sidebar"></div>
+
+    <!-- Offcanvas Navigation for Mobile Viewports -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-normal" id="mobileSidebarLabel">Enclave</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body p-3">
+        <nav class="nav flex-column gap-1">
+          <a href="#welcome" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Welcome</a>
+          <a href="#dashboard" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Dashboard</a>
+          <a href="#data" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Data Table</a>
+          <a href="#clean" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Cleaning</a>
+          <a href="#export" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Export</a>
+          <div class="pt-3 mt-2 border-top">
+            <button
+              class="btn btn-sm btn-outline-secondary w-100 d-flex align-items-center justify-content-center gap-2"
+              id="mobileThemeToggleBtn">
+              <i class="bi bi-moon"></i> Toggle theme
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+
+      <!-- Top Bar -->
+      <header class="top-navbar">
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-secondary d-md-none" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#mobileSidebar" aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-secondary d-none d-md-inline-flex align-items-center justify-content-center p-1 px-2 top-sidebar-toggle-btn"
+            id="topSidebarToggleBtn" title="Toggle Sidebar (Ctrl+B)" aria-label="Toggle sidebar">
+            <i class="bi bi-layout-sidebar-inset" id="topSidebarToggleIcon"></i>
+          </button>
+          <div class="ms-1">
+            <span class="dataset-name" id="navbarDatasetName">No file selected</span>
+            <span class="dataset-meta ms-2" id="navbarDatasetRows"></span>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1" id="themeToggleBtn"
+            title="Toggle color theme (Light / Dark)" aria-label="Toggle theme">
+            <i class="bi bi-moon" id="themeToggleIcon"></i>
+            <span class="d-none d-md-inline" id="themeToggleText">Theme</span>
+          </button>
+          <button class="btn btn-sm btn-outline-secondary" id="loadDemoTopBtn">
+            Load sample
+          </button>
+          <button class="btn btn-sm btn-primary" onclick="document.getElementById('csvFileInput').click()">
+            Upload CSV
+          </button>
+        </div>
+      </header>
+
+      <!-- Hidden CSV File Input -->
+      <input type="file" id="csvFileInput" class="d-none" accept=".csv,.tsv,.txt">
+
+      <!-- View 1: Welcome & Upload Screen (Minimal, Fit to Screen, Editorial) -->
+      <main id="view-welcome" class="page-content welcome-screen-wrapper">
+        <div class="welcome-compact-container">
+
+          <!-- Hero Headline -->
+          <div class="welcome-hero text-center mb-4">
+            <h1 class="page-title mb-2">Turn CSV data into structured analysis.</h1>
+            <p class="text-muted small mx-auto mb-0" style="max-width: 520px;">
+              Client-side profiling, automated visualization, and non-destructive cleaning. No data leaves your machine.
+            </p>
+          </div>
+
+          <!-- Drop & Upload Zone -->
+          <div class="welcome-drop-card dropzone-container mb-4" id="uploadDropzone" tabindex="0" role="button"
+            aria-label="Upload CSV. Press Enter to select file.">
+            <div class="welcome-drop-inner">
+              <div class="welcome-drop-icon mb-2">
+                <i class="bi bi-cloud-arrow-up"></i>
+              </div>
+              <div class="welcome-drop-title mb-1">Drag and drop a CSV, TSV, or TXT file</div>
+              <div class="text-muted small font-mono mb-3">
+                Delimiter auto-detection • UTF-8 & Latin-1 • Up to 50 MB
+              </div>
+              <button type="button" class="btn btn-sm btn-primary px-3 py-1-5">
+                <i class="bi bi-folder2-open me-1"></i> Select file from disk
+              </button>
+            </div>
+
+            <!-- Upload Progress Line -->
+            <div class="upload-progress-wrapper p-3 border-top d-none" id="uploadProgressWrapper">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="small text-muted font-mono" id="uploadStatusText">Parsing and profiling dataset...</span>
+                <button type="button" class="btn btn-link btn-sm text-danger p-0 font-mono text-decoration-none"
+                  id="cancelUploadBtn">Cancel</button>
+              </div>
+              <div class="thin-progress">
+                <div class="thin-progress-bar" id="uploadProgressBar" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preloaded Sample Datasets -->
+          <div class="text-center">
+            <div class="text-muted small font-mono text-uppercase letter-spacing-1 mb-2">
+              Sample datasets for evaluation
+            </div>
+            <div class="d-flex justify-content-center gap-2 flex-wrap">
+              <button class="btn btn-sm btn-outline-secondary" id="loadDemoBtn">
+                Sales records (800 rows)
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" id="loadMessyBtn">
+                Messy quoted file
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" id="downloadSampleBtn">
+                Download sales CSV
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- View 2: Dashboard Screen -->
+      <section id="view-dashboard" class="page-content d-none">
+        <!-- Sticky Dashboard Subheader Bar -->
+        <div class="dashboard-sticky-bar" id="dashboardStickyBar">
+          <div class="d-flex justify-content-between align-items-baseline mb-3 flex-wrap gap-2">
+            <div>
+              <h1 class="page-title mb-1">Dashboard</h1>
+              <div class="text-muted small">Summary statistics and auto-recommended visualizations.</div>
+            </div>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <!-- Chart Color Theme Selector -->
+              <div class="dropdown" id="chartThemeDropdownWrapper">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2" type="button" id="chartThemeDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false" title="Change Chart Color Palette">
+                  <span class="palette-swatch-dot" id="activeThemeSwatchDot"></span>
+                  <span id="activeThemeLabel">Electric Cobalt</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end font-sans small shadow-sm" id="chartThemeMenu">
+                  <li><h6 class="dropdown-header text-uppercase font-mono">Chart Color Theme</h6></li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2 active" data-theme-key="default"><span class="theme-swatch" style="background:#2563EB;"></span> Electric Cobalt</button></li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2" data-theme-key="emerald"><span class="theme-swatch" style="background:#059669;"></span> Emerald Mint</button></li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2" data-theme-key="sunset"><span class="theme-swatch" style="background:#EA580C;"></span> Sunset Amber</button></li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2" data-theme-key="cyber"><span class="theme-swatch" style="background:#EC4899;"></span> Cyber Neon</button></li>
+                  <li><button class="dropdown-item d-flex align-items-center gap-2" data-theme-key="pastel"><span class="theme-swatch" style="background:#8B5CF6;"></span> Pastel Calm</button></li>
+                </ul>
+              </div>
+
+              <button class="btn btn-sm btn-outline-secondary" id="toggleSmartInsightsBtn" title="Jump to Executive Smart Insights">
+                <i class="bi bi-lightbulb"></i> <span class="d-none d-sm-inline">Smart Insights</span>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" id="toggleCorrelationSectionBtn" title="Scroll to Correlation Matrix">
+                <i class="bi bi-grid-3x3"></i> <span class="d-none d-sm-inline">Correlation Matrix</span>
+              </button>
+              <button class="btn btn-sm btn-outline-secondary" id="addCustomChartBtn">
+                <i class="bi bi-plus-lg me-1"></i> Add custom chart
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Filter Chips Bar (Cross-Filtering Feedback, Sticky) -->
+          <div class="active-filters-bar d-none mt-2" id="dashboardActiveFilters"></div>
+        </div>
+
+        <!-- Stats Shown as One Divided Strip -->
+        <div class="stats-strip mb-4" id="dashboardKpis"></div>
+
+        <!-- Executive Smart Insights & Storytelling Banner -->
+        <div id="dashboardSmartInsightsMount" class="mb-4"></div>
+
+        <!-- Data Quality Warnings Section -->
+        <div class="mb-4" id="dashboardWarnings"></div>
+
+        <!-- Correlation Matrix & Heatmap Section -->
+        <div id="dashboardCorrelationMount" class="mb-4"></div>
+
+        <!-- Visualizations Grid (Varied Spans) -->
+        <div class="row g-4" id="chartsGrid"></div>
+
+        <!-- Show More Recommendations Control -->
+        <div class="mt-4 text-center">
+          <button class="btn btn-sm btn-outline-secondary d-none" id="showMoreRecsBtn">
+            Show more recommendations
+          </button>
+        </div>
+      </section>
+
+      <!-- View 3: Data Exploration Table Screen -->
+      <section id="view-data" class="page-content d-none">
+        <div class="d-flex justify-content-between align-items-baseline mb-3 flex-wrap gap-2">
+          <div>
+            <h1 class="page-title mb-1">Data Table</h1>
+            <div class="text-muted small">Search, sort, and filter rows. Filters update dashboard metrics in real time.
+            </div>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary" id="clearFiltersBtn">
+            Clear filters
+          </button>
+        </div>
+
+        <!-- Active Filter Chips Bar -->
+        <div class="active-filters-bar d-none mb-3" id="tableActiveFilters"></div>
+
+        <!-- Search and Column Filters Panel -->
+        <div class="card-insight mb-3">
+          <div class="card-insight-body p-3">
+            <div class="row g-2 mb-3">
+              <div class="col-12 col-md-6">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                  <input type="text" class="form-control border-start-0 border-end-0 font-sans" id="tableGlobalSearch"
+                    placeholder="Search rows...">
+                  <span class="input-group-text bg-white border-start-0 text-muted font-mono small">/</span>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center gap-2">
+                <span class="small text-muted font-mono">Rows per page:</span>
+                <select class="form-select form-select-sm w-auto font-mono" id="tablePageSize">
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Per-Column Dynamic Filter Inputs -->
+            <div class="border-top pt-2">
+              <div class="small text-muted font-mono text-uppercase mb-2">Column Filters</div>
+              <div class="row g-2" id="tableColumnFilters"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card-insight">
+          <div class="card-insight-body p-0">
+            <div class="table-responsive" style="max-height: 560px;">
+              <table class="table-insight" id="dataTableMain">
+                <thead id="dataTableThead"></thead>
+                <tbody id="dataTableTbody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-insight-header d-flex justify-content-between align-items-center py-2 px-3">
+            <span class="small text-muted font-mono" id="tableRowsInfo">0 rows</span>
+            <ul class="pagination pagination-sm mb-0 font-mono" id="tablePagination"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- View 4: Data Cleaning Screen -->
+      <section id="view-clean" class="page-content d-none">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 flex-wrap gap-2">
+          <div>
+            <h1 class="page-title mb-1">Data Cleaning</h1>
+            <div class="text-muted small">Sequential, reversible transformations applied to the original dataset.</div>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-secondary" id="undoCleanOpBtn" disabled>
+              Undo step
+            </button>
+            <button class="btn btn-sm btn-outline-danger" id="resetCleanOpsBtn">
+              Reset all
+            </button>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Cleaning Operations -->
+          <div class="col-12 col-lg-7">
+            <div class="card-insight mb-4">
+              <div class="card-insight-header">
+                <div class="fw-semibold">Available Operations</div>
+              </div>
+              <div class="card-insight-body p-0">
+                <div class="list-group list-group-flush">
+
+                  <!-- Group: Duplicates & Missing Values -->
+                  <div class="list-group-item bg-body-tertiary py-2 px-3">
+                    <span class="col-stats-section-label"><i class="bi bi-trash3 me-1"></i>Duplicates & Missing
+                      Values</span>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Remove exact duplicates</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Removes identical rows across all
+                        columns.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="remove_duplicates">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Drop blank rows</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Removes rows containing missing or NA
+                        tokens.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="handle_blanks_drop">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Impute mean</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Fills missing numeric cells with the
+                        column average.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="handle_blanks_mean">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Impute median</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Fills missing numeric cells with median
+                        (robust against outliers).</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="handle_blanks_median">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Impute mode</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Fills missing categorical cells with the
+                        most frequent value.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="handle_blanks_mode">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <!-- Group: Text & Case Formatting -->
+                  <div class="list-group-item bg-body-tertiary py-2 px-3">
+                    <span class="col-stats-section-label"><i class="bi bi-fonts me-1"></i>Text & Case Formatting</span>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Trim whitespace</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Strips leading and trailing spaces
+                        across text columns.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="trim_whitespace">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Convert to Title Case</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Capitalizes First Letter of every word
+                        (e.g. John Doe).</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="case_title">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Convert to UPPERCASE</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Standardizes all text cells to uppercase
+                        letters.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="case_upper">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Convert to lowercase</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Standardizes all text cells to lowercase
+                        letters.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="case_lower">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Strip special characters</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Removes symbols and punctuation from
+                        string values.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="strip_special_chars">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <!-- Group: Numeric & Statistical Cleaning -->
+                  <div class="list-group-item bg-body-tertiary py-2 px-3">
+                    <span class="col-stats-section-label"><i class="bi bi-calculator me-1"></i>Numeric &
+                      Statistical</span>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Filter statistical outliers</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Drops rows beyond 1.5 &times; IQR
+                        boundary in numeric data.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="remove_outliers">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Round to 2 decimal places</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Rounds floating point numbers to clean 2
+                        decimal places.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="round_numbers_2">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Round to whole numbers</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Rounds all decimal values to integers (0
+                        decimals).</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="round_numbers_0">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <!-- Group: Column & Date Normalization -->
+                  <div class="list-group-item bg-body-tertiary py-2 px-3">
+                    <span class="col-stats-section-label"><i class="bi bi-layout-sidebar-inset me-1"></i>Column & Date
+                      Normalization</span>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Drop empty columns</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Removes any column where 100% of cells
+                        are empty or missing.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="drop_empty_columns">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                  <div class="list-group-item d-flex justify-content-between align-items-center py-2 px-3">
+                    <div>
+                      <div class="fw-semibold small">Standardize dates (ISO)</div>
+                      <div class="text-muted small" style="font-size: 0.75rem;">Formats all date values into standard
+                        YYYY-MM-DD.</div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary btn-clean-action" data-op="standardize_dates">
+                      Preview & apply
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cleaning History Stack -->
+          <div class="col-12 col-lg-5">
+            <div class="card-insight">
+              <div class="card-insight-header d-flex justify-content-between align-items-center">
+                <div class="fw-semibold">Applied Operations Stack</div>
+                <span class="font-mono small text-muted" id="cleanOpsCountBadge">0 applied</span>
+              </div>
+              <div class="card-insight-body p-0">
+                <ul class="list-group list-group-flush font-mono small" id="cleanOpsHistoryList">
+                  <li class="list-group-item text-muted">Original dataset (no operations applied)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- View 5: Export Center Screen -->
+      <section id="view-export" class="page-content d-none">
+        <div class="mb-4">
+          <h1 class="page-title mb-1">Export</h1>
+          <div class="text-muted small">Download sanitized CSV subsets or a multi-page PDF summary.</div>
+        </div>
+
+        <div class="row g-4">
+          <!-- CSV Exports -->
+          <div class="col-12 col-md-6">
+            <div class="card-insight h-100">
+              <div class="card-insight-header">
+                <div class="fw-semibold">CSV Export</div>
+              </div>
+              <div class="card-insight-body">
+                <p class="text-muted small mb-3">RFC 4180 compliant with formula injection neutralization.</p>
+
+                <div class="form-check mb-4">
+                  <input class="form-check-input" type="checkbox" id="formulaProtectionCheck" checked>
+                  <label class="form-check-label small text-muted" for="formulaProtectionCheck">
+                    Neutralize formula injection (prefixes =, +, -, @ with ')
+                  </label>
+                </div>
+
+                <div class="d-flex flex-column gap-2">
+                  <button class="btn btn-sm btn-outline-secondary text-start py-2 px-3" id="exportCleanedCsvBtn">
+                    <div class="fw-semibold">Export Cleaned CSV</div>
+                    <div class="text-muted small">Includes all applied cleaning steps</div>
+                  </button>
+
+                  <button class="btn btn-sm btn-outline-secondary text-start py-2 px-3" id="exportFilteredCsvBtn">
+                    <div class="fw-semibold">Export Filtered View</div>
+                    <div class="text-muted small">Includes rows matching active filters</div>
+                  </button>
+
+                  <button class="btn btn-sm btn-outline-secondary text-start py-2 px-3" id="exportOriginalCsvBtn">
+                    <div class="fw-semibold">Export Original CSV</div>
+                    <div class="text-muted small">Raw unedited input</div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PDF Report -->
+          <div class="col-12 col-md-6">
+            <div class="card-insight h-100">
+              <div class="card-insight-header">
+                <div class="fw-semibold">Executive PDF Report</div>
+              </div>
+              <div class="card-insight-body">
+                <p class="text-muted small mb-3">Multi-page summary document with dataset profiling and chart canvases.
+                </p>
+
+                <ul class="text-muted small mb-4 ps-3">
+                  <li>Dataset parameters, dimensions, and memory estimate</li>
+                  <li>Data quality findings and anomalies</li>
+                  <li>Selected chart visualizations rendered at print resolution</li>
+                </ul>
+
+                <button class="btn btn-sm btn-primary w-100 py-2" id="exportPdfReportBtn">
+                  Generate PDF Report
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Modal 1: Add Custom Chart Modal -->
+  <div class="modal fade" id="addChartModal" tabindex="-1" aria-labelledby="addChartModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content border">
+        <div class="modal-header">
+          <h5 class="modal-title font-sans fw-semibold fs-6" id="addChartModalLabel">Add custom chart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label small">Chart title</label>
+            <input type="text" class="form-control form-control-sm" id="newChartTitle"
+              placeholder="e.g. Revenue by Region">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">Type</label>
+            <select class="form-select form-select-sm" id="newChartType">
+              <option value="bar">Bar</option>
+              <option value="line">Line</option>
+              <option value="area">Area</option>
+              <option value="doughnut">Doughnut</option>
+              <option value="pie">Pie</option>
+              <option value="scatter">Scatter</option>
+              <option value="histogram">Histogram</option>
+              <option value="boxplot">Box & Whisker Plot</option>
+              <option value="bubble">Bubble Chart (3 Metrics)</option>
+              <option value="heatmap">2D Category Heatmap</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small" id="newChartXLabel">X Axis</label>
+            <select class="form-select form-select-sm" id="newChartX"></select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small" id="newChartYLabel">Y Axis (measure)</label>
+            <select class="form-select form-select-sm" id="newChartY"></select>
+          </div>
+          <div class="mb-3 d-none" id="newChartZWrapper">
+            <label class="form-label small" id="newChartZLabel">Z Metric (Size / Intensity)</label>
+            <select class="form-select form-select-sm" id="newChartZ"></select>
+          </div>
+          <div class="mb-3 d-none" id="newChartCatWrapper">
+            <label class="form-label small">Color Grouping (Categorical)</label>
+            <select class="form-select form-select-sm" id="newChartCat"></select>
+          </div>
+          <div class="mb-3" id="newChartAggWrapper">
+            <label class="form-label small">Aggregation</label>
+            <select class="form-select form-select-sm" id="newChartAgg">
+              <option value="sum">Sum</option>
+              <option value="mean">Average</option>
+              <option value="count">Count</option>
+              <option value="min">Minimum</option>
+              <option value="max">Maximum</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm btn-primary" id="confirmAddChartBtn">Add chart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Edit Chart Config Modal -->
+  <div class="modal fade" id="chartCustomModal" tabindex="-1" aria-labelledby="chartCustomModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content border">
+        <div class="modal-header">
+          <h5 class="modal-title font-sans fw-semibold fs-6" id="chartCustomModalLabel">Customize chart</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label small">Title</label>
+            <input type="text" class="form-control form-control-sm" id="modalChartTitle">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">Type</label>
+            <select class="form-select form-select-sm" id="modalChartType">
+              <option value="bar">Bar</option>
+              <option value="line">Line</option>
+              <option value="area">Area</option>
+              <option value="doughnut">Doughnut</option>
+              <option value="pie">Pie</option>
+              <option value="scatter">Scatter</option>
+              <option value="histogram">Histogram</option>
+              <option value="boxplot">Box & Whisker Plot</option>
+              <option value="bubble">Bubble Chart (3 Metrics)</option>
+              <option value="heatmap">2D Category Heatmap</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">X Axis</label>
+            <select class="form-select form-select-sm" id="modalChartX"></select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">Y Axis</label>
+            <select class="form-select form-select-sm" id="modalChartY"></select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small">Aggregation</label>
+            <select class="form-select form-select-sm" id="modalChartAgg">
+              <option value="sum">Sum</option>
+              <option value="mean">Average</option>
+              <option value="count">Count</option>
+              <option value="min">Min</option>
+              <option value="max">Max</option>
+            </select>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="modalChartLegend" checked>
+            <label class="form-check-label small text-muted" for="modalChartLegend">Display legend</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm btn-primary" id="modalSaveChartBtn">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Cleaning Operation Preview Modal -->
+  <div class="modal fade" id="cleaningPreviewModal" tabindex="-1" aria-labelledby="cleaningPreviewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content border">
+        <div class="modal-header">
+          <h5 class="modal-title font-sans fw-semibold fs-6" id="cleaningPreviewModalLabel">Operation preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="cleanModalDesc" class="text-muted small mb-3"></p>
+          <div id="cleanModalStats" class="mb-3"></div>
+          <div class="small text-muted font-mono">Operations are reversible via the undo stack.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-sm btn-primary" id="cleanModalApplyBtn">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Universal Command Palette (Ctrl+K / ⌘K) -->
+  <div class="modal fade" id="commandPaletteModal" tabindex="-1" aria-labelledby="cmdPaletteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 520px;">
+      <div class="modal-content border">
+        <div class="modal-header border-bottom p-2">
+          <div class="input-group input-group-sm w-100">
+            <span class="input-group-text bg-transparent border-0"><i class="bi bi-search text-muted"></i></span>
+            <input type="text" class="form-control border-0 font-sans" id="cmdPaletteSearchInput"
+              placeholder="Type a command or jump to view..." autofocus>
+            <span class="input-group-text bg-transparent border-0 text-muted font-mono small">Esc</span>
+          </div>
+        </div>
+        <div class="modal-body p-0">
+          <div class="cmd-list" id="cmdPaletteList" style="max-height: 320px; overflow-y: auto;">
+            <!-- Commands injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Correlation Scatter & Linear Regression Drilldown Modal -->
+  <div class="modal fade" id="correlationScatterModal" tabindex="-1" aria-labelledby="corrScatterModalTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border">
+        <div class="modal-header border-bottom">
+          <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-graph-up text-primary fs-5"></i>
+            <div>
+              <h5 class="modal-title font-sans fw-semibold fs-6 mb-0" id="corrScatterModalTitle">Scatter Analysis</h5>
+              <div class="text-muted small">Bivariate distribution with least-squares linear trendline</div>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+          <!-- Regression Metrics Strip -->
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge bg-light text-primary border font-mono px-2 py-1" id="corrScatterBadgeR">Pearson r: --</span>
+            <span class="badge bg-light text-muted border font-mono px-2 py-1" id="corrScatterBadgeR2">R²: --</span>
+            <span class="badge bg-light text-muted border font-mono px-2 py-1" id="corrScatterBadgeEq">Fit: --</span>
+            <span class="badge bg-light text-muted border font-mono px-2 py-1" id="corrScatterBadgeCount">-- data pairs</span>
+          </div>
+          <!-- Scatter Canvas -->
+          <div style="position: relative; height: 360px; width: 100%;">
+            <canvas id="corrScatterModalCanvas"></canvas>
+          </div>
+        </div>
+        <div class="modal-footer border-top d-flex justify-content-between">
+          <div class="text-muted small">
+            <i class="bi bi-info-circle me-1"></i> Red dashed line displays best-fit linear regression
+          </div>
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm btn-primary" id="corrScatterPinBtn">
+              <i class="bi bi-pin-angle me-1"></i> Pin Scatter to Dashboard
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Column Stats Sidebar -->
+  <aside id="colStatsSidebar" class="col-stats-sidebar" aria-label="Column statistics panel" role="complementary"
+    hidden>
+    <div class="col-stats-backdrop" id="colStatsBackdrop"></div>
+    <div class="col-stats-panel">
+      <!-- Header -->
+      <div class="col-stats-header">
+        <div>
+          <div class="col-stats-title" id="colStatsTitle">Column</div>
+          <div class="col-stats-subtitle" id="colStatsSubtitle"></div>
+        </div>
+        <button class="col-stats-close" id="colStatsCloseBtn" aria-label="Close column stats">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <!-- Column quick switcher -->
+      <div class="mb-3">
+        <label for="colStatsSelect" class="form-label col-stats-section-label mb-1">Select Column</label>
+        <select id="colStatsSelect" class="form-select form-select-sm font-sans"
+          aria-label="Select column to inspect"></select>
+      </div>
+
+      <!-- Missing / coverage bar -->
+      <div class="col-stats-coverage" id="colStatsCoverage"></div>
+
+      <!-- Numeric stats grid -->
+      <div id="colStatsNumericGrid" class="col-stats-grid d-none"></div>
+
+      <!-- Mini inline histogram -->
+      <div id="colStatsHistoWrapper" class="col-stats-histo-wrapper d-none">
+        <div class="col-stats-section-label">Distribution</div>
+        <canvas id="colStatsHistoCanvas" height="100"></canvas>
+      </div>
+
+      <!-- Categorical frequency bars -->
+      <div id="colStatsCatWrapper" class="d-none">
+        <div class="col-stats-section-label">Top values</div>
+        <div id="colStatsCatBars"></div>
+      </div>
+
+      <!-- Date stats -->
+      <div id="colStatsDateWrapper" class="d-none">
+        <div class="col-stats-section-label">Date range</div>
+        <div id="colStatsDateInfo" class="col-stats-date-info"></div>
+        <div class="col-stats-section-label mt-3">By year</div>
+        <div id="colStatsYearBars"></div>
+      </div>
+
+      <!-- Boolean / identifier stats -->
+      <div id="colStatsBoolWrapper" class="d-none">
+        <div class="col-stats-section-label">Value breakdown</div>
+        <div id="colStatsBoolBars"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container-custom" id="toastContainer" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Pinned CDN Scripts with Exact SRI Hashes -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
+    integrity="sha384-D/t0ZMqQW31H3az8ktEiNb39wyKnS82iFY52QPACM+IjKW3jDUhyIgh2PApRqJZs"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
+    integrity="sha384-NrKB+u6Ts6AtkIhwPixiKTzgSKNblyhlk0Sohlgar9UHUBzai/sgnNNWWd291xqt"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
+    integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk"
+    crossorigin="anonymous"></script>
+
+  <!-- ES Module Application Root -->
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>

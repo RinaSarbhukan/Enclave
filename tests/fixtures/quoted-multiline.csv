@@ -1,0 +1,6 @@
+Item,Description,Cost
+101,"Line one
+Line two with ""quotes"" inside",45.90
+102,"Normal text, with comma",12.50
+103,"Another item;
+with line breaks",99.00
