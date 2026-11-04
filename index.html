@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' data: blob:;">
+    content="default-src 'self'; script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://cdn.jsdelivr.net https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' data: blob: https://api.groq.com https://console.groq.com;">
   <meta name="description"
     content="Enclave: Client-side dataset profiling, automated visualization, and data cleaning.">
   <title>Enclave</title>
@@ -26,6 +26,7 @@
   <!-- Core App Styles -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/ai-query.css">
 </head>
 
 <body>
@@ -55,6 +56,10 @@
         <a href="#dashboard" class="nav-link-custom" id="navDashboard" title="Dashboard">
           <i class="bi bi-grid-1x2"></i>
           <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="#ai-query" class="nav-link-custom" id="navAiQuery" title="AI Query">
+          <i class="bi bi-stars"></i>
+          <span class="nav-label">AI Query</span>
         </a>
         <a href="#data" class="nav-link-custom" id="navData" title="Data Table">
           <i class="bi bi-table"></i>
@@ -89,6 +94,7 @@
         <nav class="nav flex-column gap-1">
           <a href="#welcome" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Welcome</a>
           <a href="#dashboard" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Dashboard</a>
+          <a href="#ai-query" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">AI Query</a>
           <a href="#data" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Data Table</a>
           <a href="#clean" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Cleaning</a>
           <a href="#export" class="nav-link text-main py-2" data-bs-dismiss="offcanvas">Export</a>
@@ -141,36 +147,36 @@
       <!-- Hidden CSV File Input -->
       <input type="file" id="csvFileInput" class="d-none" accept=".csv,.tsv,.txt">
 
-      <!-- View 1: Welcome & Upload Screen (Minimal, Fit to Screen, Editorial) -->
+      <!-- View 1: Welcome & Upload Screen -->
       <main id="view-welcome" class="page-content welcome-screen-wrapper">
-        <div class="welcome-compact-container">
-
-          <!-- Hero Headline -->
-          <div class="welcome-hero text-center mb-4">
-            <h1 class="page-title mb-2">Turn CSV data into structured analysis.</h1>
-            <p class="text-muted small mx-auto mb-0" style="max-width: 520px;">
-              Client-side profiling, automated visualization, and non-destructive cleaning. No data leaves your machine.
+        <div class="welcome-landing">
+          <section class="welcome-copy" aria-labelledby="welcomeHeadline">
+            <h1 class="welcome-title" id="welcomeHeadline">From raw data<br>to <em>clear insight.</em></h1>
+            <p class="welcome-description">
+              A calmer way to explore, visualize, and clean your CSV.
             </p>
-          </div>
+          </section>
 
-          <!-- Drop & Upload Zone -->
-          <div class="welcome-drop-card dropzone-container mb-4" id="uploadDropzone" tabindex="0" role="button"
-            aria-label="Upload CSV. Press Enter to select file.">
-            <div class="welcome-drop-inner">
-              <div class="welcome-drop-icon mb-2">
-                <i class="bi bi-cloud-arrow-up"></i>
+          <section class="welcome-start" aria-label="Start exploring your data">
+            <div class="welcome-start-heading">
+              <div>
+                <span class="welcome-start-kicker">START EXPLORING</span>
+                <h2>Bring your data</h2>
               </div>
-              <div class="welcome-drop-title mb-1">Drag and drop a CSV, TSV, or TXT file</div>
-              <div class="text-muted small font-mono mb-3">
-                Delimiter auto-detection • UTF-8 & Latin-1 • Up to 50 MB
-              </div>
-              <button type="button" class="btn btn-sm btn-primary px-3 py-1-5">
-                <i class="bi bi-folder2-open me-1"></i> Select file from disk
-              </button>
+              <i class="bi bi-file-earmark-spreadsheet" aria-hidden="true"></i>
             </div>
 
-            <!-- Upload Progress Line -->
-            <div class="upload-progress-wrapper p-3 border-top d-none" id="uploadProgressWrapper">
+            <button type="button" class="welcome-drop-card" id="uploadDropzone"
+              aria-label="Choose or drop a CSV, TSV, or TXT file">
+              <span class="welcome-drop-inner">
+                <span class="welcome-drop-icon"><i class="bi bi-cloud-arrow-up"></i></span>
+                <span class="welcome-drop-title">Drop a file to get started</span>
+                <span class="welcome-drop-hint">CSV, TSV, or TXT · up to 50 MB</span>
+                <span class="welcome-select-file"><i class="bi bi-folder2-open me-1"></i> Choose a file</span>
+              </span>
+            </button>
+
+            <div class="upload-progress-wrapper welcome-upload-progress p-3 border-top d-none" id="uploadProgressWrapper">
               <div class="d-flex justify-content-between align-items-center mb-1">
                 <span class="small text-muted font-mono" id="uploadStatusText">Parsing and profiling dataset...</span>
                 <button type="button" class="btn btn-link btn-sm text-danger p-0 font-mono text-decoration-none"
@@ -180,26 +186,16 @@
                 <div class="thin-progress-bar" id="uploadProgressBar" style="width: 0%;"></div>
               </div>
             </div>
-          </div>
 
-          <!-- Preloaded Sample Datasets -->
-          <div class="text-center">
-            <div class="text-muted small font-mono text-uppercase letter-spacing-1 mb-2">
-              Sample datasets for evaluation
+            <div class="welcome-sample-row">
+              <span>Curious?</span>
+              <button type="button" id="loadDemoBtn">Try a sample dataset <i class="bi bi-arrow-right"></i></button>
             </div>
-            <div class="d-flex justify-content-center gap-2 flex-wrap">
-              <button class="btn btn-sm btn-outline-secondary" id="loadDemoBtn">
-                Sales records (800 rows)
-              </button>
-              <button class="btn btn-sm btn-outline-secondary" id="loadMessyBtn">
-                Messy quoted file
-              </button>
-              <button class="btn btn-sm btn-outline-secondary" id="downloadSampleBtn">
-                Download sales CSV
-              </button>
-            </div>
-          </div>
+          </section>
 
+          <div class="welcome-privacy-note">
+            <i class="bi bi-shield-lock"></i> Your data stays on your device. Always.
+          </div>
         </div>
       </main>
 
@@ -229,6 +225,9 @@
                 </ul>
               </div>
 
+              <a href="#ai-query" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1" id="jumpToAiQueryBtn" title="Ask natural-language questions in AI Query">
+                <i class="bi bi-stars text-accent"></i> <span class="d-none d-sm-inline">AI Query</span>
+              </a>
               <button class="btn btn-sm btn-outline-secondary" id="toggleSmartInsightsBtn" title="Jump to Executive Smart Insights">
                 <i class="bi bi-lightbulb"></i> <span class="d-none d-sm-inline">Smart Insights</span>
               </button>
@@ -268,7 +267,28 @@
         </div>
       </section>
 
-      <!-- View 3: Data Exploration Table Screen -->
+      <!-- View 3: AI Query Screen -->
+      <section id="view-ai-query" class="page-content d-none">
+        <div class="d-flex justify-content-between align-items-baseline mb-4 flex-wrap gap-2">
+          <div>
+            <h1 class="page-title mb-1">AI Query</h1>
+            <div class="text-muted small">Ask questions about your data in plain English. Queries translate into SQL and execute locally in your browser.</div>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-light text-muted border font-mono px-2 py-1" style="font-size: 0.72rem;">
+              <i class="bi bi-shield-lock me-1 text-success"></i>Zero Row Data Sent
+            </span>
+          </div>
+        </div>
+
+        <!-- AI Query Bar Mount -->
+        <div id="aiQueryBarMount"></div>
+
+        <!-- AI Query Results Mount -->
+        <div id="aiQueryResultsMount"></div>
+      </section>
+
+      <!-- View 4: Data Exploration Table Screen -->
       <section id="view-data" class="page-content d-none">
         <div class="d-flex justify-content-between align-items-baseline mb-3 flex-wrap gap-2">
           <div>
@@ -924,6 +944,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"
     integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk"
     crossorigin="anonymous"></script>
+  <!-- AlaSQL: In-browser SQL engine for AI Query (FR-17) -->
+  <script src="https://cdn.jsdelivr.net/npm/alasql@3.1.0/dist/alasql.min.js"
+    crossorigin="anonymous"
+    onerror="console.error('[Enclave] AlaSQL failed to load from CDN. AI Query will be unavailable.')"></script>
 
   <!-- ES Module Application Root -->
   <script type="module" src="js/app.js"></script>

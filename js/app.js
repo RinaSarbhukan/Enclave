@@ -15,6 +15,7 @@ import { debounce } from './utils.js';
 import { setupColStatsSidebar, openColumnStats } from './colStatsSidebar.js';
 import { renderCorrelationCard, openScatterModal } from './correlationMatrix.js';
 import { renderSmartInsightsCard, generateSmartInsights } from './smartInsights.js';
+import { initQueryUI, onDatasetLoaded as onAiQueryDatasetLoaded } from './queryUI.js';
 
 /**
  * Global App State
@@ -41,6 +42,9 @@ export const state = {
   },
   abortController: null
 };
+
+/** Shared reference for queryUI to call buildChartData */
+let _enclaveBuildChartData = null;
 
 // Immediate early theme application to prevent flash of wrong theme
 if (typeof document !== 'undefined') {
@@ -69,6 +73,23 @@ export function initApp() {
   setupAddChartModal();
   setupCommandPalette();
   setupColStatsSidebar(() => state);
+
+  // Initialize AI Query UI
+  _enclaveBuildChartData = buildChartData; // expose for queryUI chart rendering
+  globalThis._enclaveBuildChartData = buildChartData;
+  initQueryUI({
+    getState: () => state,
+    showToast,
+    onPinChart: (chartConfig) => {
+      state.renderedCharts.unshift(chartConfig);
+      renderDashboardCharts();
+      showToast(`Pinned "${chartConfig.title}" to Dashboard!`, 'success');
+      setTimeout(() => document.getElementById('chartsGrid')?.scrollIntoView({ behavior: 'smooth' }), 150);
+    },
+    recommendCharts,
+    renderChart,
+    exportToCsv,
+  });
 
   // Jump to correlation matrix button in dashboard header
   const jumpCorrBtn = document.getElementById('toggleCorrelationSectionBtn');
@@ -387,7 +408,7 @@ function setupNavigation() {
 
 function handleHashChange() {
   const hash = window.location.hash || '#welcome';
-  const views = ['welcome', 'dashboard', 'data', 'clean', 'export'];
+  const views = ['welcome', 'dashboard', 'ai-query', 'data', 'clean', 'export'];
 
   let activeView = hash.replace('#', '');
   if (!views.includes(activeView)) activeView = 'welcome';
@@ -426,6 +447,10 @@ function handleHashChange() {
     renderCleaningView();
   } else if (activeView === 'dashboard') {
     renderDashboardCharts();
+  } else if (activeView === 'ai-query') {
+    setTimeout(() => {
+      document.getElementById('aiQueryInput')?.focus();
+    }, 80);
   }
 }
 
@@ -628,6 +653,9 @@ export function loadDatasetIntoState(parsedResult, datasetName) {
   renderDashboard();
   renderTableFilters();
 
+  // Notify AI Query UI that a new dataset is loaded
+  onAiQueryDatasetLoaded();
+
   window.location.hash = '#dashboard';
 }
 
@@ -675,6 +703,7 @@ export function renderDashboardSmartInsights() {
   renderSmartInsightsCard(mount, {
     rows: state.viewData,
     headers: state.cleanedData.headers,
+    datasetName: state.fileName || 'Active Dataset',
     columnTypes,
     onCopyFeedback: msg => showToast(msg, 'success')
   });
@@ -1494,7 +1523,8 @@ function setupCommandPalette() {
   const ALL_COMMANDS = [
     { label: 'Go to Welcome', desc: 'Upload a new file', action: () => { window.location.hash = '#welcome'; }, shortcut: '' },
     { label: 'Go to Dashboard', desc: 'Charts and summary statistics', action: () => { window.location.hash = '#dashboard'; }, shortcut: '' },
-    { label: 'Go to Data Table', desc: 'Search, sort, and filter rows', action: () => { window.location.hash = '#data'; }, shortcut: '/' },
+    { label: 'Go to AI Query', desc: 'Ask natural-language questions about your dataset', action: () => { window.location.hash = '#ai-query'; }, shortcut: '/' },
+    { label: 'Go to Data Table', desc: 'Search, sort, and filter rows', action: () => { window.location.hash = '#data'; }, shortcut: '' },
     { label: 'Go to Data Cleaning', desc: 'Apply reversible transformations', action: () => { window.location.hash = '#clean'; }, shortcut: '' },
     { label: 'Go to Export', desc: 'Download CSV, PNG, or PDF report', action: () => { window.location.hash = '#export'; }, shortcut: '' },
     { label: 'Load sample dataset', desc: 'Load built-in 800-row sales data', action: () => document.getElementById('loadDemoBtn')?.click(), shortcut: '' },

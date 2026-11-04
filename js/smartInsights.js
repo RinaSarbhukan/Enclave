@@ -5,6 +5,7 @@
  */
 
 import { parseNumber, parseDate, isMissingValue, computeNumericStats, computeBoxPlotStats, computePearsonCorrelation } from './utils.js';
+import { generateAiExecutiveBriefing } from './llmClient.js';
 
 /**
  * @typedef {Object} InsightItem
@@ -536,19 +537,34 @@ export function generateSmartInsights({ rows = [], headers = [], columnTypes = {
   return result;
 }
 
+const _aiBriefingCache = new Map();
+let _isGeneratingAi = false;
+
+function _escHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 /**
  * Renders the Executive Smart Insights Card into the DOM.
+ * Integrates Groq AI Executive Briefing when online with automatic local statistical fallback.
+ *
  * @param {HTMLElement} container
  * @param {object} params
  * @param {Array<Map<string, any>>} params.rows
  * @param {Array<{ key: string, label: string }>} params.headers
+ * @param {string} [params.datasetName='Active Dataset']
  * @param {object} [params.columnTypes={}]
  * @param {Function} [params.onCopyFeedback]
  */
 export function renderSmartInsightsCard(container, params = {}) {
   if (!container) return;
 
-  const { rows = [], headers = [], columnTypes = {}, onCopyFeedback } = params;
+  const { rows = [], headers = [], datasetName = 'Active Dataset', columnTypes = {}, onCopyFeedback } = params;
 
   if (!rows || rows.length === 0) {
     container.innerHTML = '';
@@ -576,15 +592,82 @@ export function renderSmartInsightsCard(container, params = {}) {
     return;
   }
 
+  const isOnline = typeof navigator !== 'undefined' && navigator.onLine;
+  const cacheKey = `${datasetName}_${rows.length}_${headers.length}`;
+  let currentAiBriefing = _aiBriefingCache.get(cacheKey) || null;
+
+  const countPillText = isOnline
+    ? (currentAiBriefing ? `${currentAiBriefing.insights?.length || 0} AI insights` : 'AI Analyzing…')
+    : `${insights.length} key takeaway${insights.length === 1 ? '' : 's'}`;
+
+  const badgeHtml = isOnline
+    ? `<span class="badge bg-primary-subtle text-primary border font-mono small d-flex align-items-center gap-1" id="smartInsightsEngineBadge" style="font-size:0.7rem;"><i class="bi bi-stars"></i> AI Powered</span>`
+    : `<span class="badge bg-secondary-subtle text-secondary border font-mono small d-flex align-items-center gap-1" id="smartInsightsEngineBadge" style="font-size:0.7rem;"><i class="bi bi-wifi-off"></i> Offline Analysis</span>`;
+
+  // Helper to build AI insight filter pills
+  const buildAiFilterStripHtml = (aiInsights) => {
+    if (!aiInsights || aiInsights.length === 0) return '';
+    const labelMap = {
+      driver: 'Drivers',
+      risk: 'Red Flags',
+      opportunity: 'Opportunities',
+      efficiency: 'Margin & Volume',
+      anomaly: 'Anomalies',
+      pareto: 'Pareto 80/20',
+      velocity: 'Trends',
+    };
+    const uniqueTypes = [...new Set(aiInsights.map(i => i.type))];
+    const pills = [
+      `<button class="smart-filter-pill active" data-filter="all">All (${aiInsights.length})</button>`
+    ];
+    for (const t of uniqueTypes) {
+      const count = aiInsights.filter(i => i.type === t).length;
+      const label = labelMap[t] || (t.charAt(0).toUpperCase() + t.slice(1));
+      pills.push(`<button class="smart-filter-pill" data-filter="${_escHtml(t)}">${label} (${count})</button>`);
+    }
+    return pills.join('');
+  };
+
+  // Helper to render AI insight cards HTML
+  const buildAiCardsHtml = (aiInsights) => {
+    if (!aiInsights || aiInsights.length === 0) {
+      return `<div class="col-12 text-center text-muted p-4 small">No critical strategic risks or anomalies detected by AI.</div>`;
+    }
+    return aiInsights.map(item => `
+      <div class="col-12 col-md-6 smart-insight-col" data-insight-type="${_escHtml(item.type)}">
+        <div class="smart-insight-item h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="smart-badge ${item.badgeClass || 'badge-driver'}">
+              <i class="bi ${item.icon || 'bi-stars'} me-1"></i>${_escHtml(item.badge || 'AI Insight')}
+            </span>
+            <span class="badge bg-primary-subtle text-primary font-mono" style="font-size: 0.62rem;"><i class="bi bi-stars me-1"></i>AI</span>
+          </div>
+          <div class="smart-item-title mb-1">${_escHtml(item.title)}</div>
+          <div class="smart-item-narrative mb-2">${_escHtml(item.narrative)}</div>
+          <div class="smart-item-action">
+            <span class="action-tag">Action:</span> ${_escHtml(item.recommendation)}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  };
+
   container.innerHTML = `
     <div class="smart-insights-card mb-4" id="smartInsightsContainer">
       <div class="smart-insights-header d-flex justify-content-between align-items-center flex-wrap gap-2">
-        <div class="d-flex align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2 flex-wrap">
           <span class="smart-pulse-dot"></span>
           <span class="smart-title font-sans fw-semibold">✦ Executive Smart Insights</span>
-          <span class="smart-count-pill font-mono">${insights.length} key takeaway${insights.length === 1 ? '' : 's'}</span>
+          <span class="smart-count-pill font-mono" id="smartCountPill">${countPillText}</span>
+          ${badgeHtml}
         </div>
         <div class="d-flex align-items-center gap-2">
+          ${isOnline ? `
+            <button type="button" class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1 font-sans" id="btnSynthesizeAiInsights" title="${currentAiBriefing ? 'Refresh AI Executive Synthesis with Groq' : 'Generate Executive AI Briefing with Groq'}">
+              <i class="bi bi-stars" id="iconSynthesizeAi"></i>
+              <span id="labelSynthesizeAi">${currentAiBriefing ? 'Refresh AI' : 'AI Synthesis'}</span>
+            </button>
+          ` : ''}
           <button type="button" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 font-sans" id="btnCopyExecutiveBriefing" title="Copy clean executive markdown briefing to clipboard">
             <i class="bi bi-clipboard"></i> <span>Copy Briefing</span>
           </button>
@@ -595,32 +678,103 @@ export function renderSmartInsightsCard(container, params = {}) {
       </div>
 
       <div class="smart-insights-body" id="smartInsightsBody">
-        <!-- High-Level Executive Synopsis Banner -->
-        <div class="smart-synopsis-bar mb-3">
-          <i class="bi bi-stars text-primary me-2"></i>
-          <span class="fw-medium text-main">${summary}</span>
+        ${!isOnline ? `
+          <!-- Offline Notice Banner -->
+          <div class="p-3 rounded border mb-3 bg-surface-subtle d-flex align-items-center justify-content-between flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-wifi-off text-muted fs-5"></i>
+              <div>
+                <div class="fw-semibold text-main small">AI Executive Insights Unavailable Offline</div>
+                <div class="text-secondary small" style="font-size:0.75rem;">An internet connection is required for AI executive briefings. Showing offline statistical analysis.</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-xs btn-outline-primary font-sans" id="btnCheckOnlineConnection">
+              <i class="bi bi-arrow-clockwise me-1"></i>Check Connection
+            </button>
+          </div>
+        ` : ''}
+
+        <!-- High-Level Executive Synopsis Banner (AI Powered or Statistical) -->
+        <div class="smart-synopsis-bar mb-3 ${isOnline ? 'ai-powered' : ''}" id="smartSynopsisMount">
+          ${isOnline ? (
+            currentAiBriefing ? `
+              <div class="w-100">
+                <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                  <span class="badge bg-primary text-white font-mono" style="font-size: 0.65rem; letter-spacing: 0.04em;">
+                    <i class="bi bi-stars me-1"></i>AI EXECUTIVE BRIEFING
+                  </span>
+                  <span class="fw-semibold text-main">${_escHtml(currentAiBriefing.executiveHeadline)}</span>
+                </div>
+                <div class="text-secondary small mt-1" style="line-height:1.45;">${_escHtml(currentAiBriefing.synopsis)}</div>
+              </div>
+            ` : `
+              <div class="w-100 d-flex align-items-center gap-2">
+                <span class="spinner-border spinner-border-sm text-primary" role="status"></span>
+                <span class="fw-medium text-main small font-sans">Synthesizing AI Executive Briefing with Groq…</span>
+              </div>
+            `
+          ) : `
+            <i class="bi bi-cpu text-secondary me-2"></i>
+            <span class="fw-medium text-main">${summary}</span>
+          `}
+        </div>
+
+        <!-- AI Strategic Priorities Mount -->
+        <div id="smartAiPrioritiesMount">
+          ${(isOnline && currentAiBriefing?.strategicPriorities?.length > 0) ? `
+            <div class="smart-ai-priorities mb-3 p-3 rounded border">
+              <div class="small fw-semibold text-uppercase font-mono text-muted mb-2" style="font-size:0.7rem; letter-spacing: 0.04em;">
+                <i class="bi bi-compass text-primary me-1"></i>Strategic Priorities & Recommended Actions
+              </div>
+              <div class="row g-2">
+                ${currentAiBriefing.strategicPriorities.map((priority, idx) => `
+                  <div class="col-12 col-md-4">
+                    <div class="p-2 rounded bg-surface border h-100 small shadow-xs">
+                      <div class="fw-semibold text-primary mb-1 font-mono" style="font-size:0.72rem;">0${idx + 1}</div>
+                      <div class="text-main" style="font-size:0.8rem;line-height:1.35;">${_escHtml(priority)}</div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
         </div>
 
         <!-- Filter Pill Chips -->
-        <div class="smart-filter-strip mb-3 d-flex gap-2 flex-wrap" id="smartFilterStrip">
-          <button class="smart-filter-pill active" data-filter="all">All (${insights.length})</button>
-          ${insights.some(i => i.type === 'driver') ? `<button class="smart-filter-pill" data-filter="driver">Drivers</button>` : ''}
-          ${insights.some(i => i.type === 'risk') ? `<button class="smart-filter-pill" data-filter="risk">Red Flags</button>` : ''}
-          ${insights.some(i => i.type === 'pareto') ? `<button class="smart-filter-pill" data-filter="pareto">Pareto 80/20</button>` : ''}
-          ${insights.some(i => i.type === 'anomaly') ? `<button class="smart-filter-pill" data-filter="anomaly">Anomalies</button>` : ''}
-          ${insights.some(i => i.type === 'correlation') ? `<button class="smart-filter-pill" data-filter="correlation">Correlations</button>` : ''}
-          ${insights.some(i => i.type === 'velocity') ? `<button class="smart-filter-pill" data-filter="velocity">Trends</button>` : ''}
+        <div class="smart-filter-strip mb-3 d-flex gap-2 flex-wrap ${isOnline && !currentAiBriefing ? 'd-none' : ''}" id="smartFilterStrip">
+          ${isOnline ? (
+            currentAiBriefing ? buildAiFilterStripHtml(currentAiBriefing.insights) : ''
+          ) : `
+            <button class="smart-filter-pill active" data-filter="all">All (${insights.length})</button>
+            ${insights.some(i => i.type === 'driver') ? `<button class="smart-filter-pill" data-filter="driver">Drivers</button>` : ''}
+            ${insights.some(i => i.type === 'risk') ? `<button class="smart-filter-pill" data-filter="risk">Red Flags</button>` : ''}
+            ${insights.some(i => i.type === 'pareto') ? `<button class="smart-filter-pill" data-filter="pareto">Pareto 80/20</button>` : ''}
+            ${insights.some(i => i.type === 'anomaly') ? `<button class="smart-filter-pill" data-filter="anomaly">Anomalies</button>` : ''}
+            ${insights.some(i => i.type === 'correlation') ? `<button class="smart-filter-pill" data-filter="correlation">Correlations</button>` : ''}
+            ${insights.some(i => i.type === 'velocity') ? `<button class="smart-filter-pill" data-filter="velocity">Trends</button>` : ''}
+          `}
         </div>
 
-        <!-- Insights Grid -->
+        <!-- Insights Grid (Strictly AI Insights When Online, Local Statistical Only When Offline) -->
         <div class="row g-3" id="smartInsightsList">
-          ${insights.map(item => `
+          ${isOnline ? (
+            currentAiBriefing ? buildAiCardsHtml(currentAiBriefing.insights) : `
+              <div class="col-12 text-center py-5 my-2" id="smartAiLoadingIndicator">
+                <div class="spinner-border spinner-border-sm text-primary mb-2" role="status"></div>
+                <div class="fw-semibold text-main font-sans">Synthesizing AI Executive Insights…</div>
+                <div class="text-secondary small mt-1 font-sans">
+                  <i class="bi bi-shield-check text-success me-1"></i>Privacy-safe: Zero row data sent. Distilling strategic drivers with Groq.
+                </div>
+              </div>
+            `
+          ) : insights.map(item => `
             <div class="col-12 col-md-6 smart-insight-col" data-insight-type="${item.type}">
               <div class="smart-insight-item h-100">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <span class="smart-badge ${item.badgeClass}">
                     <i class="bi ${item.icon} me-1"></i>${item.badge}
                   </span>
+                  <span class="badge bg-secondary-subtle text-secondary font-mono" style="font-size: 0.62rem;">Statistical</span>
                 </div>
                 <div class="smart-item-title mb-1">${item.title}</div>
                 <div class="smart-item-narrative mb-2">${item.narrative}</div>
@@ -635,11 +789,271 @@ export function renderSmartInsightsCard(container, params = {}) {
     </div>
   `;
 
-  // Wire Copy Button
+  // Function to attach filter pill listeners
+  const bindFilterPills = () => {
+    const filterPills = container.querySelectorAll('.smart-filter-pill');
+    const insightCards = container.querySelectorAll('.smart-insight-col');
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.getAttribute('data-filter');
+
+        insightCards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-insight-type') === filter) {
+            card.classList.remove('d-none');
+          } else {
+            card.classList.add('d-none');
+          }
+        });
+      });
+    });
+  };
+
+  // Initial pill binding
+  bindFilterPills();
+
+  // Function to apply AI briefing to the rendered card
+  const applyAiBriefing = (briefing) => {
+    currentAiBriefing = briefing;
+    const synopsisMount = container.querySelector('#smartSynopsisMount');
+    const prioritiesMount = container.querySelector('#smartAiPrioritiesMount');
+    const engineBadge = container.querySelector('#smartInsightsEngineBadge');
+    const countPill = container.querySelector('#smartCountPill');
+    const filterStrip = container.querySelector('#smartFilterStrip');
+    const listEl = container.querySelector('#smartInsightsList');
+    const btnLabel = container.querySelector('#labelSynthesizeAi');
+
+    if (countPill) {
+      countPill.textContent = `${briefing.insights?.length || 0} AI insights`;
+    }
+
+    if (synopsisMount) {
+      synopsisMount.className = 'smart-synopsis-bar mb-3 ai-powered';
+      synopsisMount.innerHTML = `
+        <div class="w-100">
+          <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+            <span class="badge bg-primary text-white font-mono" style="font-size: 0.65rem; letter-spacing: 0.04em;">
+              <i class="bi bi-stars me-1"></i>AI EXECUTIVE BRIEFING
+            </span>
+            <span class="fw-semibold text-main">${_escHtml(briefing.executiveHeadline)}</span>
+          </div>
+          <div class="text-secondary small mt-1" style="line-height:1.45;">${_escHtml(briefing.synopsis)}</div>
+        </div>
+      `;
+    }
+
+    if (prioritiesMount && briefing.strategicPriorities && briefing.strategicPriorities.length > 0) {
+      prioritiesMount.innerHTML = `
+        <div class="smart-ai-priorities mb-3 p-3 rounded border">
+          <div class="small fw-semibold text-uppercase font-mono text-muted mb-2" style="font-size:0.7rem; letter-spacing: 0.04em;">
+            <i class="bi bi-compass text-primary me-1"></i>Strategic Priorities & Recommended Actions
+          </div>
+          <div class="row g-2">
+            ${briefing.strategicPriorities.map((priority, idx) => `
+              <div class="col-12 col-md-4">
+                <div class="p-2 rounded bg-surface border h-100 small shadow-xs">
+                  <div class="fw-semibold text-primary mb-1 font-mono" style="font-size:0.72rem;">0${idx + 1}</div>
+                  <div class="text-main" style="font-size:0.8rem;line-height:1.35;">${_escHtml(priority)}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // Render filter pills for AI categories
+    if (filterStrip) {
+      filterStrip.innerHTML = buildAiFilterStripHtml(briefing.insights);
+      filterStrip.classList.remove('d-none');
+    }
+
+    // Render strictly the AI insights cards
+    if (listEl) {
+      listEl.innerHTML = buildAiCardsHtml(briefing.insights);
+    }
+
+    // Re-bind pills to filter AI cards
+    bindFilterPills();
+
+    if (engineBadge) {
+      engineBadge.className = 'badge bg-primary-subtle text-primary border font-mono small d-flex align-items-center gap-1';
+      engineBadge.innerHTML = `<i class="bi bi-stars"></i> AI Powered`;
+    }
+
+    if (btnLabel) {
+      btnLabel.textContent = 'Refresh AI';
+    }
+  };
+
+  // Helper to trigger AI synthesis from Groq
+  const fetchAiSynthesis = async (isManual = false) => {
+    if (_isGeneratingAi) return;
+    _isGeneratingAi = true;
+
+    const btnAi = container.querySelector('#btnSynthesizeAiInsights');
+    const iconAi = container.querySelector('#iconSynthesizeAi');
+    const labelAi = container.querySelector('#labelSynthesizeAi');
+
+    if (iconAi) {
+      iconAi.className = 'spinner-border spinner-border-sm';
+    }
+    if (labelAi) {
+      labelAi.textContent = 'Analyzing…';
+    }
+    if (btnAi) btnAi.disabled = true;
+
+    try {
+      const res = await generateAiExecutiveBriefing({
+        datasetName,
+        rowCount: rows.length,
+        colCount: headers.length,
+        statisticalSummary: summary,
+        insights,
+      });
+
+      _aiBriefingCache.set(cacheKey, res);
+      applyAiBriefing(res);
+
+      if (isManual && onCopyFeedback) {
+        onCopyFeedback('Executive AI Briefing synthesized with Groq!');
+      }
+    } catch (err) {
+      const listEl = container.querySelector('#smartInsightsList');
+      if (listEl && !currentAiBriefing) {
+        listEl.innerHTML = `
+          <div class="col-12">
+            <div class="p-3 border rounded bg-surface-subtle d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-exclamation-triangle text-warning fs-5"></i>
+                <div>
+                  <div class="fw-semibold text-main small">AI Executive Synthesis Unavailable</div>
+                  <div class="text-secondary small">${_escHtml(err.message || 'Could not reach AI provider')}</div>
+                </div>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-xs btn-outline-primary font-sans" id="btnRetryAiFetch">
+                  <i class="bi bi-arrow-clockwise me-1"></i>Retry AI
+                </button>
+                <button type="button" class="btn btn-xs btn-outline-secondary font-sans" id="btnRenderLocalFallback">
+                  <i class="bi bi-cpu me-1"></i>View Local Statistical Analysis
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const retryBtn = listEl.querySelector('#btnRetryAiFetch');
+        if (retryBtn) retryBtn.addEventListener('click', () => fetchAiSynthesis(true));
+
+        const fallbackBtn = listEl.querySelector('#btnRenderLocalFallback');
+        if (fallbackBtn) {
+          fallbackBtn.addEventListener('click', () => {
+            listEl.innerHTML = insights.map(item => `
+              <div class="col-12 col-md-6 smart-insight-col" data-insight-type="${item.type}">
+                <div class="smart-insight-item h-100">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="smart-badge ${item.badgeClass}">
+                      <i class="bi ${item.icon} me-1"></i>${item.badge}
+                    </span>
+                    <span class="badge bg-secondary-subtle text-secondary font-mono" style="font-size: 0.62rem;">Statistical</span>
+                  </div>
+                  <div class="smart-item-title mb-1">${item.title}</div>
+                  <div class="smart-item-narrative mb-2">${item.narrative}</div>
+                  <div class="smart-item-action">
+                    <span class="action-tag">Action:</span> ${item.recommendation}
+                  </div>
+                </div>
+              </div>
+            `).join('');
+            bindFilterPills();
+          });
+        }
+      }
+
+      if (isManual && onCopyFeedback) {
+        onCopyFeedback(`AI Briefing: ${err.message || 'Generation failed'}`);
+      }
+    } finally {
+      _isGeneratingAi = false;
+      if (iconAi) iconAi.className = 'bi bi-stars';
+      if (labelAi) labelAi.textContent = currentAiBriefing ? 'Refresh AI' : 'AI Synthesis';
+      if (btnAi) btnAi.disabled = false;
+    }
+  };
+
+  // If online and not yet cached, generate automatically in background
+  if (isOnline && !currentAiBriefing) {
+    setTimeout(() => {
+      fetchAiSynthesis(false);
+    }, 150);
+  }
+
+  // Wire AI Synthesis button
+  const btnSynthesize = container.querySelector('#btnSynthesizeAiInsights');
+  if (btnSynthesize) {
+    btnSynthesize.addEventListener('click', () => {
+      fetchAiSynthesis(true);
+    });
+  }
+
+  // Wire Check Connection button if offline
+  const btnCheckConn = container.querySelector('#btnCheckOnlineConnection');
+  if (btnCheckConn) {
+    btnCheckConn.addEventListener('click', () => {
+      if (navigator.onLine) {
+        renderSmartInsightsCard(container, params);
+      } else if (onCopyFeedback) {
+        onCopyFeedback('Still offline. Please check your network connection.');
+      }
+    });
+  }
+
+  // Wire Copy Button (includes AI Briefing if present)
   const btnCopy = container.querySelector('#btnCopyExecutiveBriefing');
   if (btnCopy) {
     btnCopy.addEventListener('click', async () => {
-      const text = toClipboardText();
+      let text = toClipboardText();
+      if (currentAiBriefing) {
+        const timestamp = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+        const aiLines = [
+          `==================================================`,
+          `ENCLAVE - AI EXECUTIVE BRIEFING & STRATEGIC SYNTHESIS`,
+          `Dataset: ${datasetName} | Scope: ${rows.length.toLocaleString()} rows | Date: ${timestamp}`,
+          `==================================================`,
+          ``,
+          `BOTTOM-LINE-UP-FRONT (BLUF):`,
+          currentAiBriefing.executiveHeadline,
+          ``,
+          `EXECUTIVE SYNOPSIS:`,
+          currentAiBriefing.synopsis,
+          ``,
+        ];
+
+        if (currentAiBriefing.strategicPriorities && currentAiBriefing.strategicPriorities.length > 0) {
+          aiLines.push(`STRATEGIC PRIORITIES & RECOMMENDED ACTIONS:`);
+          currentAiBriefing.strategicPriorities.forEach((p, idx) => {
+            aiLines.push(`  [${idx + 1}] ${p}`);
+          });
+          aiLines.push(``);
+        }
+
+        aiLines.push(`AI STRATEGIC INSIGHTS:`);
+        const briefingInsights = (currentAiBriefing.insights && currentAiBriefing.insights.length > 0)
+          ? currentAiBriefing.insights
+          : insights;
+        briefingInsights.forEach((item, idx) => {
+          aiLines.push(`\n[${idx + 1}] ${(item.badge || 'INSIGHT').toUpperCase()}: ${item.title}`);
+          aiLines.push(`    • Narrative: ${item.narrative}`);
+          aiLines.push(`    • Action:    ${item.recommendation}`);
+        });
+
+        aiLines.push(`\n--------------------------------------------------`);
+        aiLines.push(`Confidential | AI Powered by Groq & Enclave`);
+        text = aiLines.join('\n');
+      }
+
       try {
         await navigator.clipboard.writeText(text);
         btnCopy.innerHTML = `<i class="bi bi-check-lg text-success"></i> <span>Copied!</span>`;
@@ -648,7 +1062,6 @@ export function renderSmartInsightsCard(container, params = {}) {
           btnCopy.innerHTML = `<i class="bi bi-clipboard"></i> <span>Copy Briefing</span>`;
         }, 2200);
       } catch (err) {
-        // Fallback for older browsers
         const textarea = document.createElement('textarea');
         textarea.value = text;
         document.body.appendChild(textarea);
@@ -693,4 +1106,15 @@ export function renderSmartInsightsCard(container, params = {}) {
       });
     });
   });
+
+  // Auto-upgrade to AI insights when network connection is restored
+  if (!isOnline && typeof window !== 'undefined') {
+    const onReconnected = () => {
+      window.removeEventListener('online', onReconnected);
+      if (document.body.contains(container)) {
+        renderSmartInsightsCard(container, params);
+      }
+    };
+    window.addEventListener('online', onReconnected);
+  }
 }
